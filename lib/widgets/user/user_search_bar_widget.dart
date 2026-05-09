@@ -13,17 +13,17 @@ class _UserSearchBarWidgetState extends State<UserSearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return GlassCardWidget(
+      padding: EdgeInsetsGeometry.all(1),
       height: 50,
       dark: true,
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
-          //   hintText: "Search Tenant",
-          //   hintStyle: TextStyle(color: Colors.black38),
+            hintText: "Search Tenant",
+            // hintStyle: TextStyle(color: Colors.black38),
           prefixIcon: Icon(Icons.search, color: Colors.black),
-          // border: InputBorder.none,
-          //   contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          border: InputBorder.none,
         ),
       ),
     );

@@ -10,6 +10,7 @@ class GlassCardWidget extends StatelessWidget {
   final double blur;
   final EdgeInsetsGeometry padding;
   final bool dark;
+  final VoidCallback? onTap;
 
   const GlassCardWidget({
     super.key,
@@ -21,6 +22,7 @@ class GlassCardWidget extends StatelessWidget {
     this.blur = 15,
     this.padding = const EdgeInsets.all(20),
     this.dark = false,
+    this.onTap,
   });
 
   @override
@@ -72,9 +74,24 @@ class GlassCardWidget extends StatelessWidget {
                 ],
         ),
 
-        child: Material(
-          color: Colors.transparent,
-          child: Padding(padding: padding, child: child),
+        child: Stack(
+          children: [
+            Material(
+              color: Colors.transparent,
+              child: Padding(padding: padding, child: child),
+            ),
+
+            if (onTap != null)
+              Positioned.fill(
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    onTap: onTap,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
