@@ -3,7 +3,8 @@ import 'package:frontend/widgets/glass_card_widget.dart';
 // import 'package:glassmorphism/glassmorphism.dart'; //
 
 class UserSearchBarWidget extends StatefulWidget {
-  const UserSearchBarWidget({super.key});
+  final String hintText;
+  const UserSearchBarWidget({super.key, required this.hintText});
 
   @override
   State<UserSearchBarWidget> createState() => _UserSearchBarWidgetState();
@@ -20,8 +21,7 @@ class _UserSearchBarWidgetState extends State<UserSearchBarWidget> {
         textAlignVertical: TextAlignVertical.center,
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
-            hintText: "Search Tenant",
-            // hintStyle: TextStyle(color: Colors.black38),
+          hintText: widget.hintText,
           prefixIcon: Icon(Icons.search, color: Colors.black),
           border: InputBorder.none,
         ),

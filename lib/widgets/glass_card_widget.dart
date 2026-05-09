@@ -31,14 +31,6 @@ class GlassCardWidget extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
-        boxShadow: [
-          // BoxShadow(
-          //   color: Colors.black.withValues(alpha: 0.05),
-          //   spreadRadius: 2, // How far the shadow spreads
-          //   blurRadius: 3, // Softness of the shadow
-          //   offset: Offset(0, 2), // Position (x, y)
-          // ),
-        ],
       ),
       child: GlassmorphicContainer(
         width: width,
