@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:glassmorphism/glassmorphism.dart';
+
+class GlassCardWidget extends StatelessWidget {
+  final Widget child;
+  final double width;
+  final double height;
+  final double borderRadius;
+  final double border;
+  final double blur;
+  final EdgeInsetsGeometry padding;
+  final bool dark;
+
+  const GlassCardWidget({
+    super.key,
+    required this.child,
+    this.width = double.infinity,
+    this.height = 1,
+    this.borderRadius = 20,
+    this.border = 1,
+    this.blur = 15,
+    this.padding = const EdgeInsets.all(20),
+    this.dark = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius),
+        boxShadow: [
+          // BoxShadow(
+          //   color: Colors.black.withValues(alpha: 0.05),
+          //   spreadRadius: 2, // How far the shadow spreads
+          //   blurRadius: 3, // Softness of the shadow
+          //   offset: Offset(0, 2), // Position (x, y)
+          // ),
+        ],
+      ),
+      child: GlassmorphicContainer(
+        width: width,
+        height: height,
+        borderRadius: borderRadius,
+        blur: blur,
+        alignment: null,
+        border: border,
+        linearGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: dark
+              ? [
+                  Colors.white.withValues(alpha: 0.9),
+                  Colors.white.withValues(alpha: 0.8),
+                ]
+              : [
+                  Colors.white.withValues(alpha: 0.15),
+                  Colors.white.withValues(alpha: 0.17),
+                ],
+        ),
+        borderGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: dark
+              ? [
+                  Colors.grey.withValues(alpha: 0.5),
+                  Colors.grey.withValues(alpha: 0.4),
+                ]
+              : [
+                  Colors.white.withValues(alpha: 0.5),
+                  Colors.white.withValues(alpha: 0.2),
+                ],
+        ),
+
+        child: Material(
+          color: Colors.transparent,
+          child: Padding(padding: padding, child: child),
+        ),
+      ),
+    );
+  }
+}
