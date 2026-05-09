@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/bee_style.dart';
 import 'package:frontend/widgets/glass_card_widget.dart';
+import 'package:frontend/widgets/user/tenant_food_item.dart';
 import 'package:frontend/widgets/user/user_search_bar_widget.dart';
 
 class TenantDetails extends StatefulWidget {
@@ -96,205 +97,67 @@ class _TenantDetailsState extends State<TenantDetails> {
                 childAspectRatio: 5 / 6,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: GlassCardWidget(
-                          dark: true,
-                          height: 400,
-                          width: 400,
-                          child: Image.asset(
-                            "assets/images/yishonaya.png",
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ),
-                      ),
-                      Text("Original Yakiniku", style: TextStyle(fontSize: 14)),
-                      Text(
-                        "Rp 58.151",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
+                  ),
+
+                  TenantFoodItem(
+                    name: "Original Yakiniku", 
+                    price: "Rp 58.151", 
+                    imagePath: "assets/images/yishonaya.png", 
+                    // onAddTap: onAddTap
                   ),
                 ],
               ),
