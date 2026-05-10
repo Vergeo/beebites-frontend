@@ -44,8 +44,8 @@ class GlassCardWidget extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: dark
               ? [
-                  Colors.white.withValues(alpha: 0.9),
-                  Colors.white.withValues(alpha: 0.8),
+                  Colors.white.withValues(alpha: 0.7),
+                  Colors.white.withValues(alpha: 0.5),
                 ]
               : [
                   Colors.white.withValues(alpha: 0.15),

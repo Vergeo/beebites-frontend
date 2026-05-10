@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/bee_style.dart';
 import 'package:frontend/pages/user/tenant_details.dart';
-import 'package:frontend/widgets/glass_card_widget.dart';
 import 'package:frontend/widgets/user/tenant_cart.dart';
 import 'package:frontend/widgets/user/user_search_bar_widget.dart';
 
