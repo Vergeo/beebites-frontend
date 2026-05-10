@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/data/bee_style.dart';
 import 'package:frontend/data/notifiers.dart';
 
 class UserNavbarWidget extends StatefulWidget {
@@ -14,20 +15,28 @@ class _UserNavbarWidgetState extends State<UserNavbarWidget> {
     return ValueListenableBuilder(
       valueListenable: selectedPageNotifier,
       builder: (context, selectedPage, child) {
-        return NavigationBar(
-          destinations: [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(
+        return BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: "Cart",
             ),
-            NavigationDestination(icon: Icon(Icons.history), label: "History"),
-            NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: "History",
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ],
-          selectedIndex: selectedPage,
-          onDestinationSelected: (index) => setState(() {
+          currentIndex: selectedPage,
+
+          onTap: (index) => setState(() {
             selectedPageNotifier.value = index;
           }),
+          unselectedItemColor: BeeStyle.lightWhite,
+          selectedItemColor: BeeStyle.orange,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: BeeStyle.blue,
         );
       },
     );
