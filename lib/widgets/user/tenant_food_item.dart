@@ -28,10 +28,7 @@ class TenantFoodItem extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.center,
-                  child: Image.asset(
-                    imagePath,
-                    fit: BoxFit.contain,
-                  ),
+                  child: Image.asset(imagePath, fit: BoxFit.contain),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -40,30 +37,24 @@ class TenantFoodItem extends StatelessWidget {
                     height: 40,
                     width: 40,
                     borderRadius: 1000,
+                    padding: EdgeInsetsGeometry.all(0),
                     onTap: onAddTap,
-                    child: Icon(Icons.add, color: Colors.black, size: 20),
+                    child: Center(
+                      child: Icon(Icons.add, color: Colors.black, size: 20),
+                    ),
                   ),
                 ),
-              ],          
-            ),          
+              ],
+            ),
           ),
         ),
 
-        Text(
-          name, 
-          style: const TextStyle(
-            fontSize: 14
-          )
-        ),
+        Text(name, style: const TextStyle(fontSize: 14)),
 
         Text(
           price,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
-          ),
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
         ),
-        
       ],
     );
   }
