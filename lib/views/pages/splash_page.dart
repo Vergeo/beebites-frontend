@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
-import 'package:frontend/pages/login_register_page.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/views/pages/login_register_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

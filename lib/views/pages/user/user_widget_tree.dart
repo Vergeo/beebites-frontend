@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
-import 'package:frontend/data/notifiers.dart';
-import 'package:frontend/pages/user/user_cart_page.dart';
-import 'package:frontend/pages/user/user_history.dart';
-import 'package:frontend/pages/user/user_home_page.dart';
-import 'package:frontend/pages/user/user_profile.dart';
-import 'package:frontend/widgets/user/user_navbar_widget.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/views/pages/user/user_cart_page.dart';
+import 'package:frontend/views/pages/user/user_history.dart';
+import 'package:frontend/views/pages/user/user_home_page.dart';
+import 'package:frontend/views/pages/user/user_profile.dart';
+import 'package:frontend/views/widgets/user/user_navbar_widget.dart';
 
 class UserWidgetTree extends StatefulWidget {
   const UserWidgetTree({super.key});

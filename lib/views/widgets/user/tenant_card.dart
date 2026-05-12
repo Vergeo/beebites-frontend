@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/glass_card_widget.dart';
+import 'package:frontend/views/widgets/glass_card_widget.dart';
 
-class TenantCart extends StatefulWidget {
+class TenantCard extends StatefulWidget {
   final VoidCallback? onTap;
-  const TenantCart({super.key, this.onTap});
+  final String tenantName;
+  final String tenantLogo;
+  const TenantCard({
+    super.key,
+    this.onTap,
+    required this.tenantName,
+    required this.tenantLogo,
+  });
 
   @override
-  State<TenantCart> createState() => _TenantCartState();
+  State<TenantCard> createState() => _TenantCardState();
 }
 
-class _TenantCartState extends State<TenantCart> {
+class _TenantCardState extends State<TenantCard> {
   @override
   Widget build(BuildContext context) {
     return GlassCardWidget(
@@ -25,18 +32,14 @@ class _TenantCartState extends State<TenantCart> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    "assets/images/yishonaya.png",
-                    width: 75,
-                    height: 75,
-                  ),
+                  child: Image.asset(widget.tenantLogo, width: 75, height: 75),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Yishonaya",
+                      widget.tenantName,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w400,

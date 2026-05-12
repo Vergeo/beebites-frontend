@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
+import 'package:frontend/models/bee_style.dart';
 import 'package:animated_toggle/animated_toggle.dart';
-import 'package:frontend/widgets/login_widget.dart';
+import 'package:frontend/views/widgets/login_widget.dart';
 
 class LoginRegisterPage extends StatefulWidget {
   const LoginRegisterPage({super.key});

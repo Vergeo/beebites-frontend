@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
-import 'package:frontend/pages/user/tenant_details.dart';
-import 'package:frontend/widgets/user/tenant_cart.dart';
-import 'package:frontend/widgets/user/user_search_bar_widget.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/viewmodels/user/tenant_list.dart';
+import 'package:frontend/views/widgets/user/user_search_bar_widget.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key});
@@ -29,19 +28,7 @@ class _UserHomePageState extends State<UserHomePage> {
               ],
             ),
             UserSearchBarWidget(hintText: "Search Tenant"),
-
-            Text("All (10)", textAlign: TextAlign.left),
-
-            TenantCart(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (context) => const TenantDetails(),
-                  ),
-                );
-              },
-            ),
+            TenantList(filter: ""),
           ],
         ),
       ),

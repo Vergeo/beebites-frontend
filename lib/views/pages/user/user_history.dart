@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
-import 'package:frontend/widgets/user/user_history_widget.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/views/widgets/user/user_history_widget.dart';
 
 class UserHistory extends StatefulWidget {
   const UserHistory({super.key});

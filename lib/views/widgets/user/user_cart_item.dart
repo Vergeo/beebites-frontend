@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/glass_card_widget.dart';
+import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:flutter/gestures.dart';
-import 'package:frontend/widgets/user/item_quantity_button.dart';
+import 'package:frontend/views/widgets/user/item_quantity_button.dart';
 
 class UserCartItem extends StatelessWidget {
   final String itemName;

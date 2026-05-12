@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/data/bee_style.dart';
-import 'package:frontend/data/notifiers.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/notifiers.dart';
 
 class UserNavbarWidget extends StatefulWidget {
   const UserNavbarWidget({super.key});

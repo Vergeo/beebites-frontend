@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/glass_card_widget.dart';
+import 'package:frontend/views/widgets/glass_card_widget.dart';
 // import 'package:glassmorphism/glassmorphism.dart'; //
 
 class UserSearchBarWidget extends StatefulWidget {

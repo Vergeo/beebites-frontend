@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/splash_page.dart';
-import 'package:frontend/pages/user/user_widget_tree.dart';
+import 'package:frontend/views/pages/splash_page.dart';
+import 'package:frontend/views/pages/user/user_widget_tree.dart';
 
 void main() {
   runApp(
