@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/data/bee_style.dart';
 import 'package:frontend/data/notifiers.dart';
+import 'package:frontend/pages/user/user_cart_page.dart';
 import 'package:frontend/pages/user/user_history.dart';
 import 'package:frontend/pages/user/user_home_page.dart';
 import 'package:frontend/pages/user/user_profile.dart';
@@ -14,7 +15,7 @@ class UserWidgetTree extends StatefulWidget {
 }
 
 class _UserWidgetTreeState extends State<UserWidgetTree> {
-  List pages = [UserHomePage(), Text("Cart"), UserHistory(), UserProfile()];
+  List pages = [UserHomePage(), UserCartPage(), UserHistory(), UserProfile()];
   List pageTitles = ["Home", "Cart", "History", "Profile"];
 
   @override
