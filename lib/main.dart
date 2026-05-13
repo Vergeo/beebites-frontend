@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/views/pages/splash_page.dart';
+import 'package:frontend/views/pages/tenant/tenant_widget_tree.dart';
 import 'package:frontend/views/pages/user/user_widget_tree.dart';
 
 void main() {
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BeeBites',
       theme: ThemeData(fontFamily: "Poppins"),
-      home: const UserWidgetTree(),
+      home: const TenantWidgetTree(),
     );
   }
 }
