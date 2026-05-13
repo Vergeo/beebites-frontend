@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BeeBites',
       theme: ThemeData(fontFamily: "Poppins"),
-      home: const TenantWidgetTree(),
+      home: const UserWidgetTree(),
     );
   }
 }

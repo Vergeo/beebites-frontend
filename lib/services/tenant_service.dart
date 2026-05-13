@@ -11,7 +11,7 @@ class TenantService {
       List data = jsonDecode(response.body);
       return data.map((e) => Tenant.fromJson(e)).toList();
     }
-    return "Failed to fetch tenants!";
+    return Future.error("Failed to fetch tenants!");
   }
 
   static Future getTenant(int tenantId) async {
@@ -22,6 +22,6 @@ class TenantService {
 
       return Tenant.fromJson(data);
     }
-    return "Failed to fetch tenants!";
+    return Future.error("Failed to fetch tenant!");
   }
 }

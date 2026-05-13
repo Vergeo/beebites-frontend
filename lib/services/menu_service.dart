@@ -11,12 +11,10 @@ class MenuService {
     );
 
     if (response.statusCode == 200) {
-      if (response.statusCode == 200) {
-        List data = jsonDecode(response.body);
+      List data = jsonDecode(response.body);
 
-        return data.map((e) => Menu.fromJson(e)).toList();
-      }
+      return data.map((e) => Menu.fromJson(e)).toList();
     }
-    return "Failed to fetch menus!";
+    return Future.error("Failed to fetch menus!");
   }
 }

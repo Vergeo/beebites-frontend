@@ -1,3 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/cart.dart';
 
-ValueNotifier selectedPageNotifier = ValueNotifier(0);
+ValueNotifier<int> selectedPageNotifier = ValueNotifier(0);
+ValueNotifier<List<Cart>> cartsNotifier = ValueNotifier([]);

@@ -13,38 +13,72 @@ class MenuList extends StatefulWidget {
 }
 
 class _MenuListState extends State<MenuList> {
+  List<Menu>? menus;
+  bool isLoading = true;
+  String? errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    loadMenus();
+  }
+
+  void loadMenus() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+
+    try {
+      final data = await MenuService.getAllMenusFromTenant(widget.tenantId);
+      setState(() {
+        menus = data;
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        errorMessage = error.toString();
+        isLoading = false;
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage!),
+            backgroundColor: Colors.redAccent,
+            action: SnackBarAction(
+              label: "RETRY",
+              textColor: Colors.white,
+              onPressed: loadMenus,
+            ),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: MenuService.getAllMenusFromTenant(widget.tenantId),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
-        }
-        if (snapshot.hasData) {
-          List<Menu> menus = snapshot.data;
-          return GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 5 / 6,
-            physics: const NeverScrollableScrollPhysics(),
-            children: menus.map((menu) {
-              return TenantFoodItem(
-                name: menu.menuName,
-                price: "Rp ${menu.menuPrice}",
-                imagePath: "assets/images/yishonaya.png",
-              );
-            }).toList(),
-          );
-          // return Text("Yes");
-        }
-        if (snapshot.hasError) {
-          return Center(child: Text("${snapshot.error}"));
-        }
-        return Center(child: Text("Something went wrong. Please try again!"));
-      },
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+    if (errorMessage != null && menus == null) {
+      return Center(child: Text("$errorMessage"));
+    }
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+      childAspectRatio: 5 / 6,
+      physics: const NeverScrollableScrollPhysics(),
+      children: menus!.map((menu) {
+        return TenantFoodItem(
+          name: menu.menuName,
+          price: "Rp ${menu.menuPrice}",
+          imagePath: "assets/images/yishonaya.png",
+        );
+      }).toList(),
     );
   }
 }
