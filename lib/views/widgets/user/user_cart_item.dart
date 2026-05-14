@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/views/widgets/user/item_quantity_button.dart';
 
 class UserCartItem extends StatelessWidget {
-  final Menu menu;
-  final int quantity;
+  final Cart cart;
 
-  const UserCartItem({super.key, required this.menu, required this.quantity});
+  const UserCartItem({super.key, required this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class UserCartItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Image.asset(menu.menuImage),
+                  child: Image.asset(cart.menu.menuImage),
                 ),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(menu.menuName, style: TextStyle(fontSize: 16)),
+                    Text(cart.menu.menuName, style: TextStyle(fontSize: 16)),
                     Row(
                       children: [
                         RichText(
@@ -64,9 +64,9 @@ class UserCartItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ItemQuantityButton(quantity: quantity),
+              ItemQuantityButton(cart: cart),
               SizedBox(height: 5),
-              Text("Rp ${menu.menuPrice}"),
+              Text("Rp ${cart.menu.menuPrice * cart.quantity}"),
             ],
           ),
         ],

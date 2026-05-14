@@ -1,45 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/cart.dart';
+import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/services/cart_service.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 
-class ItemQuantityButton extends StatelessWidget {
-  final int quantity;
-  const ItemQuantityButton({
-    super.key,
-    required this.quantity
-  });
+class ItemQuantityButton extends StatefulWidget {
+  final Cart cart;
+  const ItemQuantityButton({super.key, required this.cart});
 
   @override
+  State<ItemQuantityButton> createState() => _ItemQuantityButtonState();
+}
+
+class _ItemQuantityButtonState extends State<ItemQuantityButton> {
+  @override
   Widget build(BuildContext context) {
-    return GlassCardWidget(
-      padding: EdgeInsetsGeometry.only(left: 3, right: 3),
-      dark: true,
-      width: 110,
-      height: 30,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: const Icon(Icons.remove, size: 18),
-            onPressed: () {
-          
-            },
+    return ValueListenableBuilder(
+      valueListenable: cartNotifier,
+      builder: (context, cart, child) {
+        final currentItem = cart.firstWhere(
+          (item) => item.menuId == widget.cart.menuId,
+        );
+        return GlassCardWidget(
+          padding: EdgeInsetsGeometry.all(0),
+          dark: true,
+          width: 110,
+          height: 30,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                constraints: const BoxConstraints(),
+                padding: EdgeInsets.zero,
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.remove, size: 16),
+                onPressed: () =>
+                    CartService.addMenuToCart(1, widget.cart.menuId, -1, ""),
+              ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    currentItem.quantity.toString(),
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              IconButton(
+                constraints: const BoxConstraints(),
+                padding: EdgeInsets.zero,
+                visualDensity: VisualDensity.compact,
+                icon: const Icon(Icons.add, size: 16),
+                onPressed: () =>
+                    CartService.addMenuToCart(1, widget.cart.menuId, 1, ""),
+              ),
+            ],
           ),
-          Text(
-            quantity.toString(),
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: const Icon(Icons.add, size: 18),
-            onPressed: () {
-            },
-          ),
-        ],
-      )
+        );
+      },
     );
   }
 }

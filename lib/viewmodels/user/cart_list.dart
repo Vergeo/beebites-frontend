@@ -20,7 +20,7 @@ class _CartListState extends State<CartList> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: cartsNotifier,
+      valueListenable: cartNotifier,
       builder: (context, carts, child) {
         return Column(
           spacing: 16,
@@ -31,7 +31,7 @@ class _CartListState extends State<CartList> {
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: carts.map((item) {
-                return UserCartItem(menu: item.menu, quantity: 1);
+                return UserCartItem(cart: item);
               }).toList(),
             ),
           ],

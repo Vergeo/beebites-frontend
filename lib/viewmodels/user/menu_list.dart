@@ -73,11 +73,7 @@ class _MenuListState extends State<MenuList> {
       childAspectRatio: 5 / 6,
       physics: const NeverScrollableScrollPhysics(),
       children: menus!.map((menu) {
-        return TenantFoodItem(
-          name: menu.menuName,
-          price: "Rp ${menu.menuPrice}",
-          imagePath: "assets/images/yishonaya.png",
-        );
+        return TenantFoodItem(menu: menu);
       }).toList(),
     );
   }
