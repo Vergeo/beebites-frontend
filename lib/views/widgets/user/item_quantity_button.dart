@@ -5,8 +5,8 @@ import 'package:frontend/services/cart_service.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 
 class ItemQuantityButton extends StatefulWidget {
-  final Cart cart;
-  const ItemQuantityButton({super.key, required this.cart});
+  final Cart item;
+  const ItemQuantityButton({super.key, required this.item});
 
   @override
   State<ItemQuantityButton> createState() => _ItemQuantityButtonState();
@@ -19,7 +19,7 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
       valueListenable: cartNotifier,
       builder: (context, cart, child) {
         final currentItem = cart.firstWhere(
-          (item) => item.menuId == widget.cart.menuId,
+          (item) => item.menuId == widget.item.menuId,
         );
         return GlassCardWidget(
           padding: EdgeInsetsGeometry.all(0),
@@ -36,7 +36,7 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.remove, size: 16),
                 onPressed: () =>
-                    CartService.addMenuToCart(1, widget.cart.menuId, -1, ""),
+                    CartService.addMenuToCart(1, widget.item.menuId, -1, ""),
               ),
               Expanded(
                 child: Center(
@@ -52,7 +52,7 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.add, size: 16),
                 onPressed: () =>
-                    CartService.addMenuToCart(1, widget.cart.menuId, 1, ""),
+                    CartService.addMenuToCart(1, widget.item.menuId, 1, ""),
               ),
             ],
           ),

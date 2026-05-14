@@ -64,7 +64,7 @@ class UserCartItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ItemQuantityButton(cart: cart),
+              ItemQuantityButton(item: cart),
               SizedBox(height: 5),
               Text("Rp ${cart.menu.menuPrice * cart.quantity}"),
             ],

@@ -35,7 +35,7 @@ class CartService {
       }),
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       List<Cart> currentList = List.from(cartNotifier.value);
       int index = currentList.indexWhere((item) => item.menuId == menuId);
 
