@@ -16,4 +16,6 @@ class BeeStyle {
   static const Color darkBlue = Color.fromARGB(255, 71, 107, 199);
   static const Color blue = Color.fromARGB(255, 90, 112, 205);
   static const Color lightBlue = Color.fromARGB(255, 110, 138, 211);
+
+  static const Color green = Color.fromRGBO(157, 255, 160, 0.75);
 }

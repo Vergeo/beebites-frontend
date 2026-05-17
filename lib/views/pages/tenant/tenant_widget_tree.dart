@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/views/pages/tenant/tenant_order_page.dart';
 import 'package:frontend/views/widgets/tenant/tenant_navbar_widget.dart';
 
 class TenantWidgetTree extends StatefulWidget {
@@ -11,7 +12,7 @@ class TenantWidgetTree extends StatefulWidget {
 }
 
 class _TenantWidgetTreeState extends State<TenantWidgetTree> {
-  List pages = [Text("Orders"), Text("History"), Text("Profile")];
+  List pages = [TenantOrderPage(), Text("History"), Text("Profile")];
   List pageTitles = ["Orders", "History", "Profile"];
 
   @override
