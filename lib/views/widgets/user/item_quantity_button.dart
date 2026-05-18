@@ -35,8 +35,16 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 padding: EdgeInsets.zero,
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.remove, size: 16),
-                onPressed: () =>
-                    CartService.addMenuToCart(1, widget.item.menuId, -1, ""),
+                onPressed: () {
+                  selectedTenantNotifier.value = widget.item.menu.tenantId;
+                  CartService.addMenuToCart(
+                    1,
+                    widget.item.menuId,
+                    -1,
+                    widget.item.menu.tenantId,
+                    "",
+                  );
+                },
               ),
               Expanded(
                 child: Center(
@@ -51,8 +59,15 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 padding: EdgeInsets.zero,
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.add, size: 16),
-                onPressed: () =>
-                    CartService.addMenuToCart(1, widget.item.menuId, 1, ""),
+                onPressed: () {
+                  CartService.addMenuToCart(
+                    1,
+                    widget.item.menuId,
+                    1,
+                    widget.item.menu.tenantId,
+                    "",
+                  );
+                },
               ),
             ],
           ),

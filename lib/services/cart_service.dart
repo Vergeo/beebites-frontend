@@ -9,7 +9,7 @@ import 'package:http/http.dart';
 class CartService {
   static Future getCartFromUser(int userId) async {
     var response = await get(getUri("cart/get-cart-by-user/$userId"));
-    print(response.statusCode);
+    // print(response.statusCode);
 
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
@@ -22,6 +22,7 @@ class CartService {
   static Future addMenuToCart(
     int userId,
     int menuId,
+    int tenantId,
     int quantity,
     String notes,
   ) async {
@@ -56,11 +57,26 @@ class CartService {
         }
       }
 
+      selectedTenantNotifier.value = tenantId;
       cartNotifier.value = List.from(currentList);
 
       return "Cart updated successfully!";
       // return data.map((e) => Menu.fromJson(e)).toList();
     }
     return Future.error("Failed to update cart!");
+  }
+
+  static Future checkout(int userId, int paymentId) async {
+    var response = await post(
+      getUri("cart/checkout"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"userId": userId, "paymentId": paymentId}),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      cartNotifier.value = List.from([]);
+      return "Checkout successful!";
+    }
+    return Future.error("Failed to checkout!");
   }
 }

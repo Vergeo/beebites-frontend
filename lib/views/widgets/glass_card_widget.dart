@@ -4,7 +4,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 class GlassCardWidget extends StatelessWidget {
   final Widget child;
   final double width;
-  final double height;
+  final double? height;
   final double borderRadius;
   final double border;
   final double blur;
@@ -16,7 +16,7 @@ class GlassCardWidget extends StatelessWidget {
     super.key,
     required this.child,
     this.width = double.infinity,
-    this.height = 1,
+    this.height,
     this.borderRadius = 20,
     this.border = 1,
     this.blur = 15,

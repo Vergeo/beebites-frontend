@@ -18,7 +18,6 @@ class _UserSearchBarWidgetState extends State<UserSearchBarWidget> {
       height: 50,
       dark: true,
       child: TextField(
-        textAlignVertical: TextAlignVertical.center,
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
           hintText: widget.hintText,

@@ -3,6 +3,7 @@ import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:flutter/gestures.dart';
+import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/user/item_quantity_button.dart';
 
 class UserCartItem extends StatelessWidget {
@@ -12,9 +13,9 @@ class UserCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GlassCardWidget(
+    return GlassContainerWidget(
+      padding: EdgeInsetsGeometry.all(8),
       height: 100,
-      dark: true,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -27,21 +28,21 @@ class UserCartItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Image.asset(cart.menu.menuImage),
+                  child: Image.network(cart.menu.menuImage),
                 ),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(cart.menu.menuName, style: TextStyle(fontSize: 16)),
+                    Text(cart.menu.menuName, style: TextStyle(fontSize: 12)),
                     Row(
                       children: [
                         RichText(
                           text: TextSpan(
                             text: 'Add Note',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 8,
                               color: Colors.black54,
                               decoration: TextDecoration.underline,
                             ),

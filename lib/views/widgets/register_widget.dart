@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
-import 'package:frontend/views/pages/user/user_widget_tree.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/glass_text_field_widget.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+class RegisterWidget extends StatefulWidget {
+  const RegisterWidget({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<RegisterWidget> createState() => _RegisterWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,26 +18,24 @@ class _LoginWidgetState extends State<LoginWidget> {
       child: Column(
         spacing: 32,
         children: [
+          GlassTextFieldWidget(hintText: "Full Name"),
           GlassTextFieldWidget(hintText: "Email"),
           GlassTextFieldWidget(hintText: "Password"),
+          GlassTextFieldWidget(hintText: "Confirm Password"),
           GlassContainerWidget(
             width: double.infinity,
             borderRadius: 100,
             height: 60,
             dark: true,
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const UserWidgetTree()),
-              );
-            },
+            onTap: () {},
             child: Center(
               child: Text(
-                "Login",
+                "Register",
                 style: TextStyle(color: BeeStyle.lightWhite),
               ),
             ),
           ),
+          // ElevatedButton(onPressed: () {}, child: Text("Login")),
         ],
       ),
     );

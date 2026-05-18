@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/models/payment.dart';
 import 'package:frontend/services/cart_service.dart';
+import 'package:frontend/services/payment_service.dart';
+import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/user/user_cart_item.dart';
 
 class CartList extends StatefulWidget {
@@ -11,10 +14,51 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
+  bool isLoading = true;
+  String? errorMessage;
+
   @override
   void initState() {
     super.initState();
     CartService.getCartFromUser(1);
+  }
+
+  void pay() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = null;
+    });
+    try {
+      final Payment payment = await PaymentService.createPayment(
+        1,
+        selectedTenantNotifier.value!,
+        "qris",
+      );
+
+      await CartService.checkout(1, payment.paymentId);
+      setState(() {
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        errorMessage = error.toString();
+        isLoading = false;
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage!),
+            backgroundColor: Colors.redAccent,
+            action: SnackBarAction(
+              label: "RETRY",
+              textColor: Colors.white,
+              onPressed: pay,
+            ),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -34,6 +78,7 @@ class _CartListState extends State<CartList> {
                 return UserCartItem(cart: item);
               }).toList(),
             ),
+            GlassContainerWidget(onTap: () => pay(), child: Text("Pay")),
           ],
         );
       },
