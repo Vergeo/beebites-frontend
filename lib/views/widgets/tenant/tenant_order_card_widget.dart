@@ -37,8 +37,7 @@ class TenantOrderCardWidget extends StatelessWidget {
               Text("1x"),
               Image.asset("assets/images/yishonaya.png", width: 40, height: 40,),
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,  
                 children: [
                   Text(itemName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
                   Text(notes, style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),)
