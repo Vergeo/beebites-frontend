@@ -14,13 +14,18 @@ class _UserHistoryState extends State<UserHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BeeStyle.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          Text("Order History", style: TextStyle(fontSize: 24)),
-          HistoryList(),
-        ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              Text("Order History", style: TextStyle(fontSize: 24)),
+              HistoryList(),
+            ],
+          ),
+        ),
       ),
     );
   }

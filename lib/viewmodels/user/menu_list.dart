@@ -68,8 +68,8 @@ class _MenuListState extends State<MenuList> {
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
-      crossAxisSpacing: 8,
-      mainAxisSpacing: 8,
+      crossAxisSpacing: 32,
+      mainAxisSpacing: 32,
       childAspectRatio: 5 / 6,
       physics: const NeverScrollableScrollPhysics(),
       children: menus!.map((menu) {

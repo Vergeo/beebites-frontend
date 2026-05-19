@@ -1,7 +1,7 @@
 import 'package:frontend/models/menus.dart';
 
 class Cart {
-  final int cartId;
+  final int? cartId;
   final int userId;
   final int menuId;
   final int quantity;
@@ -9,7 +9,7 @@ class Cart {
   final String notes;
 
   const Cart({
-    required this.cartId,
+    this.cartId,
     required this.userId,
     required this.menuId,
     required this.quantity,
@@ -38,7 +38,7 @@ class Cart {
   factory Cart.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'cartId': int cartId,
+        'cartId': int? cartId,
         'userId': int userId,
         'menuId': int menuId,
         'quantity': int quantity,

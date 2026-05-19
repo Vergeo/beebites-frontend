@@ -11,3 +11,4 @@ ValueNotifier<User?> currentUserNotifier = ValueNotifier(null);
 ValueNotifier<NumberFormat> currencyNotifier = ValueNotifier(
   NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp "),
 );
+ValueNotifier<String> jwtNotifier = ValueNotifier("");

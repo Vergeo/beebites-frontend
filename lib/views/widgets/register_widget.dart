@@ -18,10 +18,10 @@ class _RegisterWidgetState extends State<RegisterWidget> {
       child: Column(
         spacing: 32,
         children: [
-          GlassTextFieldWidget(hintText: "Full Name"),
-          GlassTextFieldWidget(hintText: "Email"),
-          GlassTextFieldWidget(hintText: "Password"),
-          GlassTextFieldWidget(hintText: "Confirm Password"),
+          // GlassTextFieldWidget(hintText: "Full Name"),
+          // GlassTextFieldWidget(hintText: "Email"),
+          // GlassTextFieldWidget(hintText: "Password"),
+          // GlassTextFieldWidget(hintText: "Confirm Password"),
           GlassContainerWidget(
             width: double.infinity,
             borderRadius: 100,

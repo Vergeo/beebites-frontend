@@ -22,7 +22,7 @@ class _UserWidgetTreeState extends State<UserWidgetTree> {
   @override
   void initState() {
     super.initState();
-    CartService.getCartFromUser(1);
+    CartService.getCartFromUser(currentUserNotifier.value!.userId);
   }
 
   @override
@@ -31,16 +31,8 @@ class _UserWidgetTreeState extends State<UserWidgetTree> {
       valueListenable: selectedPageNotifier,
       builder: (context, selectedPage, child) {
         return Scaffold(
-          body: Container(
-            color: BeeStyle.white,
-            padding: EdgeInsetsGeometry.only(
-              top: 32,
-              left: 16,
-              right: 16,
-              bottom: 16,
-            ),
-            child: pages[selectedPage],
-          ),
+          backgroundColor: BeeStyle.white,
+          body: SafeArea(child: pages[selectedPage]),
           bottomNavigationBar: UserNavbarWidget(),
         );
       },

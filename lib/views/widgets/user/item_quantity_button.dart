@@ -44,11 +44,12 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 onPressed: () {
                   selectedTenantNotifier.value = widget.item.menu.tenantId;
                   CartService.addMenuToCart(
-                    1,
+                    currentUserNotifier.value!.userId,
                     widget.item.menuId,
                     widget.item.menu.tenantId,
                     -1,
                     "",
+                    widget.item.menu,
                   );
                 },
               ),
@@ -67,11 +68,12 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 icon: const Icon(Icons.add, size: 16),
                 onPressed: () {
                   CartService.addMenuToCart(
-                    1,
+                    currentUserNotifier.value!.userId,
                     widget.item.menuId,
                     widget.item.menu.tenantId,
                     1,
                     "",
+                    widget.item.menu,
                   );
                 },
               ),

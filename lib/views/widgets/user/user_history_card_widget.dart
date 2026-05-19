@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/models/payment.dart';
+import 'package:frontend/views/pages/user/user_history_detail.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:intl/intl.dart';
 
@@ -38,6 +39,14 @@ class UserHistoryCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassContainerWidget(
       padding: EdgeInsetsGeometry.symmetric(horizontal: 8, vertical: 16),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserHistoryDetail(payment: payment),
+          ),
+        );
+      },
       child: Row(
         spacing: 16,
         children: [

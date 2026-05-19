@@ -14,15 +14,20 @@ class UserCartPage extends StatefulWidget {
 class _UserCartPageState extends State<UserCartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: BeeStyle.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
-        children: [
-          Text("My Order", style: TextStyle(fontSize: 24)),
-          CartList(),
-        ],
+    return Container(
+      color: BeeStyle.white,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 16,
+            children: [
+              Text("My Order", style: TextStyle(fontSize: 24)),
+              CartList(),
+            ],
+          ),
+        ),
       ),
     );
   }

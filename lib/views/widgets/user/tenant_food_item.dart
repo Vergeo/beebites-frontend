@@ -3,10 +3,8 @@ import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/services/cart_service.dart';
-import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/user/item_quantity_button.dart';
-import 'package:intl/intl.dart';
 
 class TenantFoodItem extends StatefulWidget {
   final Menu menu;
@@ -26,11 +24,12 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
       padding: EdgeInsetsGeometry.all(0),
       onTap: () => {
         CartService.addMenuToCart(
-          1,
+          currentUserNotifier.value!.userId,
           widget.menu.menuId,
           widget.menu.tenantId,
           1,
           "",
+          widget.menu,
         ),
       },
       child: Center(child: Icon(Icons.add, color: Colors.black, size: 16)),
@@ -50,6 +49,7 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
           (item) => item.menuId == widget.menu.menuId,
         );
         return Column(
+          spacing: 8,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
@@ -82,11 +82,22 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
               ),
             ),
 
-            Text(widget.menu.menuName, style: const TextStyle(fontSize: 14)),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.menu.menuName,
+                  style: const TextStyle(fontSize: 14),
+                ),
 
-            Text(
-              currencyNotifier.value.format(widget.menu.menuPrice),
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                Text(
+                  currencyNotifier.value.format(widget.menu.menuPrice),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
             ),
           ],
         );

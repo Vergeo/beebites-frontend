@@ -13,23 +13,26 @@ class UserHomePage extends StatefulWidget {
 class _UserHomePageState extends State<UserHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: BeeStyle.white,
-      body: SingleChildScrollView(
-        child: Column(
-          spacing: 16.0,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Hi, User", style: TextStyle(fontSize: 24)),
-                Text("Ready when you are.", style: TextStyle(fontSize: 24)),
-              ],
-            ),
-            UserSearchBarWidget(hintText: "Search Tenant"),
-            TenantList(filter: ""),
-          ],
+    return Container(
+      color: BeeStyle.white,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            spacing: 16.0,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Hi, User", style: TextStyle(fontSize: 24)),
+                  Text("Ready when you are.", style: TextStyle(fontSize: 24)),
+                ],
+              ),
+              UserSearchBarWidget(hintText: "Search Tenant"),
+              TenantList(filter: ""),
+            ],
+          ),
         ),
       ),
     );

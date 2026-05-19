@@ -18,22 +18,18 @@ class _TenantDetailsState extends State<TenantDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BeeStyle.white,
-      body: Container(
-        padding: EdgeInsetsGeometry.only(
-          top: 32,
-          left: 16,
-          right: 16,
-          bottom: 16,
-        ),
-        color: BeeStyle.white,
+      body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            spacing: 16,
-            children: [
-              TenantDetailHeader(tenantId: widget.tenantId),
-              UserSearchBarWidget(hintText: "Search Menu"),
-              MenuList(tenantId: widget.tenantId),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              spacing: 16,
+              children: [
+                TenantDetailHeader(tenantId: widget.tenantId),
+                UserSearchBarWidget(hintText: "Search Menu"),
+                MenuList(tenantId: widget.tenantId),
+              ],
+            ),
           ),
         ),
       ),

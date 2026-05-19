@@ -6,7 +6,14 @@ import 'package:frontend/views/widgets/glass_container_widget.dart';
 
 class GlassTextFieldWidget extends StatefulWidget {
   final String hintText;
-  const GlassTextFieldWidget({super.key, required this.hintText});
+  final TextEditingController controller;
+  final bool obscureText;
+  const GlassTextFieldWidget({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.obscureText = false,
+  });
 
   @override
   State<GlassTextFieldWidget> createState() => _GlassTextFieldWidgetState();
@@ -21,7 +28,9 @@ class _GlassTextFieldWidgetState extends State<GlassTextFieldWidget> {
       height: 60,
       child: Center(
         child: TextField(
-          style: TextStyle(color: BeeStyle.lightWhite),
+          controller: widget.controller,
+          obscureText: widget.obscureText,
+          style: TextStyle(color: BeeStyle.lightWhite, fontSize: 12),
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: TextStyle(color: BeeStyle.lightWhite, fontSize: 12),

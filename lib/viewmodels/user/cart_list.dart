@@ -20,7 +20,7 @@ class _CartListState extends State<CartList> {
   @override
   void initState() {
     super.initState();
-    CartService.getCartFromUser(1);
+    CartService.getCartFromUser(currentUserNotifier.value!.userId);
   }
 
   void pay() async {
@@ -30,12 +30,15 @@ class _CartListState extends State<CartList> {
     });
     try {
       final Payment payment = await PaymentService.createPayment(
-        1,
+        currentUserNotifier.value!.userId,
         selectedTenantNotifier.value!,
         "qris",
       );
 
-      await CartService.checkout(1, payment.paymentId);
+      await CartService.checkout(
+        currentUserNotifier.value!.userId,
+        payment.paymentId,
+      );
       setState(() {
         isLoading = false;
       });
