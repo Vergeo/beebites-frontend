@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/services/cart_service.dart';
-import 'package:frontend/views/widgets/glass_card_widget.dart';
+import 'package:frontend/views/widgets/glass_container_widget.dart';
 
 class ItemQuantityButton extends StatefulWidget {
+  final double width;
+  final double height;
   final Cart item;
-  const ItemQuantityButton({super.key, required this.item});
+  const ItemQuantityButton({
+    super.key,
+    required this.item,
+    this.width = 110,
+    this.height = 30,
+  });
 
   @override
   State<ItemQuantityButton> createState() => _ItemQuantityButtonState();
@@ -21,11 +28,10 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
         final currentItem = cart.firstWhere(
           (item) => item.menuId == widget.item.menuId,
         );
-        return GlassCardWidget(
+        return GlassContainerWidget(
           padding: EdgeInsetsGeometry.all(0),
-          dark: true,
-          width: 110,
-          height: 30,
+          width: widget.width,
+          height: widget.height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,8 +46,8 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                   CartService.addMenuToCart(
                     1,
                     widget.item.menuId,
-                    -1,
                     widget.item.menu.tenantId,
+                    -1,
                     "",
                   );
                 },
@@ -63,8 +69,8 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                   CartService.addMenuToCart(
                     1,
                     widget.item.menuId,
-                    1,
                     widget.item.menu.tenantId,
+                    1,
                     "",
                   );
                 },

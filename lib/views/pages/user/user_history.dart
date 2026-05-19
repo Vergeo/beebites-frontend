@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
-import 'package:frontend/models/payment.dart';
-import 'package:frontend/services/payment_service.dart';
 import 'package:frontend/viewmodels/user/history_list.dart';
-import 'package:frontend/views/widgets/user/user_history_widget.dart';
 
 class UserHistory extends StatefulWidget {
   const UserHistory({super.key});
@@ -17,34 +14,14 @@ class _UserHistoryState extends State<UserHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BeeStyle.white,
-      body: HistoryList(),
-      // body: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     Text(
-      //       "Order History",
-      //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-      //     ),
-      //     const SizedBox(height: 20),
-      //     UserHistoryWidget(
-      //       name: "Yishonaya",
-      //       status: "In Process",
-      //       imagePath: "assets/images/yishonaya.png",
-      //     ),
-      //     const SizedBox(height: 24),
-      //     UserHistoryWidget(
-      //       name: "Yishonaya",
-      //       status: "Completed",
-      //       imagePath: "assets/images/yishonaya.png",
-      //     ),
-      //     const SizedBox(height: 24),
-      //     UserHistoryWidget(
-      //       name: "Yishonaya",
-      //       status: "Cancelled",
-      //       imagePath: "assets/images/yishonaya.png",
-      //     ),
-      //   ],
-      // ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
+        children: [
+          Text("Order History", style: TextStyle(fontSize: 24)),
+          HistoryList(),
+        ],
+      ),
     );
   }
 }

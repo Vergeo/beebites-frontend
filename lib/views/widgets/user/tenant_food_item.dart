@@ -6,6 +6,7 @@ import 'package:frontend/services/cart_service.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/user/item_quantity_button.dart';
+import 'package:intl/intl.dart';
 
 class TenantFoodItem extends StatefulWidget {
   final Menu menu;
@@ -18,22 +19,21 @@ class TenantFoodItem extends StatefulWidget {
 
 class _TenantFoodItemState extends State<TenantFoodItem> {
   Widget buildAddButton() {
-    return GlassCardWidget(
-      dark: true,
-      height: 40,
-      width: 40,
+    return GlassContainerWidget(
+      height: 30,
+      width: 30,
       borderRadius: 1000,
       padding: EdgeInsetsGeometry.all(0),
       onTap: () => {
         CartService.addMenuToCart(
           1,
           widget.menu.menuId,
-          1,
           widget.menu.tenantId,
+          1,
           "",
         ),
       },
-      child: Center(child: Icon(Icons.add, color: Colors.black, size: 20)),
+      child: Center(child: Icon(Icons.add, color: Colors.black, size: 16)),
     );
   }
 
@@ -70,9 +70,12 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
 
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: (index == -1)
-                          ? buildAddButton()
-                          : buildCounter(cart[index]),
+                      child: Padding(
+                        padding: EdgeInsetsGeometry.all(8),
+                        child: (index == -1)
+                            ? buildAddButton()
+                            : buildCounter(cart[index]),
+                      ),
                     ),
                   ],
                 ),
@@ -82,7 +85,7 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
             Text(widget.menu.menuName, style: const TextStyle(fontSize: 14)),
 
             Text(
-              "${widget.menu.menuPrice}",
+              currencyNotifier.value.format(widget.menu.menuPrice),
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
             ),
           ],

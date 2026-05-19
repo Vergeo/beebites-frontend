@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
@@ -67,7 +68,11 @@ class UserCartItem extends StatelessWidget {
             children: [
               ItemQuantityButton(item: cart),
               SizedBox(height: 5),
-              Text("Rp ${cart.menu.menuPrice * cart.quantity}"),
+              Text(
+                currencyNotifier.value.format(
+                  cart.menu.menuPrice * cart.quantity,
+                ),
+              ),
             ],
           ),
         ],

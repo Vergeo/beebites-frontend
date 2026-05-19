@@ -70,7 +70,6 @@ class _CartListState extends State<CartList> {
           spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("My Order", style: TextStyle(fontSize: 24)),
             Column(
               spacing: 16,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -56,6 +56,12 @@ class _HistoryListState extends State<HistoryList> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+    if (errorMessage != null && payments == null) {
+      return Center(child: Text("$errorMessage"));
+    }
     return Column(
       spacing: 16.0,
       crossAxisAlignment: CrossAxisAlignment.start,
