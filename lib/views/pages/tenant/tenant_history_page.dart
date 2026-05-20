@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
-import 'package:frontend/views/widgets/glass_card_widget.dart';
-import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/tenant/tenant_history_card.dart';
 
 class TenantHistoryPage extends StatefulWidget {

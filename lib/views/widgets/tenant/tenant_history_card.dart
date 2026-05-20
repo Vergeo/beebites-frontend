@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/views/pages/tenant/tenant_history_detail_page.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 
 class TenantHistoryCard extends StatefulWidget {
@@ -57,9 +58,12 @@ class _TenantHistoryCardState extends State<TenantHistoryCard> {
                 height: 23,
                 padding: EdgeInsetsGeometry.zero,
                 dark: true,
-                child: Center(child: Text("Done", style: TextStyle(fontSize: 10, color: Colors.black.withValues(alpha: 0.75)),)),
+                child: Center(child: Text("See More", style: TextStyle(fontSize: 10, color: Colors.black.withValues(alpha: 0.75)),)),
                 onTap: () {
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(builder: (context)=> const TenantHistoryDetailPage()) 
+                  );
                 },
               )
             ],

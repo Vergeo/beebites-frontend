@@ -3,6 +3,7 @@ import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/views/pages/tenant/tenant_history_page.dart';
 import 'package:frontend/views/pages/tenant/tenant_order_page.dart';
+import 'package:frontend/views/pages/tenant/tenant_profile_page.dart';
 import 'package:frontend/views/widgets/tenant/tenant_navbar_widget.dart';
 
 class TenantWidgetTree extends StatefulWidget {
@@ -13,7 +14,7 @@ class TenantWidgetTree extends StatefulWidget {
 }
 
 class _TenantWidgetTreeState extends State<TenantWidgetTree> {
-  List pages = [TenantOrderPage(), TenantHistoryPage(), Text("Profile")];
+  List pages = [TenantOrderPage(), TenantHistoryPage(), TenantProfilePage()];
   List pageTitles = ["Orders", "History", "Profile"];
 
   @override
