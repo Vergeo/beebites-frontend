@@ -14,56 +14,6 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
-  bool isLoading = true;
-  String? errorMessage;
-
-  @override
-  void initState() {
-    super.initState();
-    CartService.getCartFromUser(currentUserNotifier.value!.userId);
-  }
-
-  void pay() async {
-    setState(() {
-      isLoading = true;
-      errorMessage = null;
-    });
-    try {
-      final Payment payment = await PaymentService.createPayment(
-        currentUserNotifier.value!.userId,
-        selectedTenantNotifier.value!,
-        "qris",
-      );
-
-      await CartService.checkout(
-        currentUserNotifier.value!.userId,
-        payment.paymentId,
-      );
-      setState(() {
-        isLoading = false;
-      });
-    } catch (error) {
-      setState(() {
-        errorMessage = error.toString();
-        isLoading = false;
-      });
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage!),
-            backgroundColor: Colors.redAccent,
-            action: SnackBarAction(
-              label: "RETRY",
-              textColor: Colors.white,
-              onPressed: pay,
-            ),
-          ),
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -80,7 +30,6 @@ class _CartListState extends State<CartList> {
                 return UserCartItem(cart: item);
               }).toList(),
             ),
-            GlassContainerWidget(onTap: () => pay(), child: Text("Pay")),
           ],
         );
       },

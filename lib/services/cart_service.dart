@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
 import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/models/order.dart';
 import 'package:frontend/services/base_api.dart';
 import 'package:http/http.dart';
 
@@ -10,11 +11,18 @@ class CartService {
   static Future getCartFromUser(int userId) async {
     var response = await get(getUri("cart/get-cart-by-user/$userId"));
     // print(response.statusCode);
+    itemCountNotifier.value = 0;
+    totalPriceNotifier.value = 0;
 
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
       cartNotifier.value = data.map((e) => Cart.fromJson(e)).toList();
-      return "Cart fetch successfully!";
+      cartNotifier.value.forEach((item) {
+        itemCountNotifier.value += item.quantity;
+        totalPriceNotifier.value += item.quantity * item.menu.menuPrice;
+        selectedTenantNotifier.value = item.menu.tenantId;
+      });
+      return data.map((e) => Order.fromJson(e)).toList();
     }
     return Future.error("Failed to fetch cart!");
   }
@@ -37,9 +45,18 @@ class CartService {
       int newQuantity = currentList[index].quantity + quantity;
 
       if (newQuantity <= 0) {
+        itemCountNotifier.value -= currentList[index].quantity;
+        totalPriceNotifier.value -=
+            currentList[index].quantity * currentList[index].menu.menuPrice;
         currentList.removeAt(index);
       } else {
+        itemCountNotifier.value -= currentList[index].quantity;
+        totalPriceNotifier.value -=
+            currentList[index].quantity * currentList[index].menu.menuPrice;
         currentList[index] = currentList[index].copyWith(quantity: newQuantity);
+        itemCountNotifier.value += currentList[index].quantity;
+        totalPriceNotifier.value +=
+            currentList[index].quantity * currentList[index].menu.menuPrice;
       }
     } else {
       if (quantity > 0) {
@@ -52,6 +69,9 @@ class CartService {
             notes: notes,
           ),
         );
+
+        itemCountNotifier.value += 1;
+        totalPriceNotifier.value += menu.menuPrice;
       }
     }
 
@@ -94,6 +114,8 @@ class CartService {
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
+      itemCountNotifier.value = 0;
+      totalPriceNotifier.value = 0;
       cartNotifier.value = List.from([]);
       return "Checkout successful!";
     }

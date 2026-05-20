@@ -42,7 +42,6 @@ class _ItemQuantityButtonState extends State<ItemQuantityButton> {
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.remove, size: 16),
                 onPressed: () {
-                  selectedTenantNotifier.value = widget.item.menu.tenantId;
                   CartService.addMenuToCart(
                     currentUserNotifier.value!.userId,
                     widget.item.menuId,
