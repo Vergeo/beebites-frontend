@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/bee_style.dart';
-import 'package:frontend/views/widgets/tenant/tenant_history_card.dart';
+import 'package:frontend/viewmodels/tenant/history_list.dart';
+import 'package:frontend/views/widgets/scrollable_page_widget.dart';
 
 class TenantHistoryPage extends StatefulWidget {
   const TenantHistoryPage({super.key});
@@ -12,18 +12,16 @@ class TenantHistoryPage extends StatefulWidget {
 class _TenantHistoryPageState extends State<TenantHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: BeeStyle.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 10,
-          children: [
-            Text("History", style: TextStyle(fontSize: 24),),
-            Text("March, 7th 2026"),
-            TenantHistoryCard(quantity: 2,)
-          ],
-        ),
+    return ScrollablePageWidget(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 10,
+        children: [
+          Text("History", style: TextStyle(fontSize: 24)),
+          // Text("March, 7th 2026"),
+          // TenantHistoryCard(),
+          HistoryList(),
+        ],
       ),
     );
   }

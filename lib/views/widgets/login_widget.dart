@@ -38,6 +38,14 @@ class _LoginWidgetState extends State<LoginWidget> {
       setState(() {
         isLoading = false;
       });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Login Successful"),
+            backgroundColor: BeeStyle.green,
+          ),
+        );
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const UserWidgetTree()),

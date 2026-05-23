@@ -1,75 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/models/payment.dart';
 import 'package:frontend/views/pages/tenant/tenant_history_detail_page.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
+import 'package:frontend/views/widgets/tenant/order_status_chip.dart';
+import 'package:intl/intl.dart';
 
 class TenantHistoryCard extends StatefulWidget {
-  final int quantity;
-  
-  const TenantHistoryCard({
-    required this.quantity,
-    super.key,
-    
-  });
-  
+  final Payment order;
+
+  const TenantHistoryCard({super.key, required this.order});
+
   @override
   State<TenantHistoryCard> createState() => _TenantHistoryCardState();
 }
 
 class _TenantHistoryCardState extends State<TenantHistoryCard> {
+  int quantity = 0;
+  @override
+  void initState() {
+    super.initState();
+    for (var order in widget.order.orders!) {
+      setState(() {
+        quantity += order.quantity;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GlassContainerWidget(
-      // height: 100,
-      padding: EdgeInsetsGeometry.all(20),
-      
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => TenantHistoryDetailPage(order: widget.order),
+          ),
+        );
+      },
       child: Column(
-        spacing: 5,
+        spacing: 8,
         children: [
           Row(
-            spacing: 15,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset("assets/images/yishonaya.png", width: 40, height: 40,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,  
-                children: [
-                  Text("itemName", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                  Text("${widget.quantity}x", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),)
-                ],
-              )
+              Expanded(
+                child: Text(
+                  "${widget.order.user!.name}'s Order",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
+              widget.order.status == "completed"
+                  ? OrderStatusChip(
+                      fillColor: BeeStyle.green,
+                      text: "Completed",
+                    )
+                  : OrderStatusChip(fillColor: BeeStyle.red, text: "Cancelled"),
             ],
           ),
-
-          if (widget.quantity > 1)
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("+${widget.quantity - 1} items",  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
-              ],
-            ),
-          
           Row(
-            // mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Expanded(child: Text("Order ID: 0001", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w300),)),
-              GlassContainerWidget(
-                width: 82,
-                height: 23,
-                padding: EdgeInsetsGeometry.zero,
-                dark: true,
-                child: Center(child: Text("See More", style: TextStyle(fontSize: 10, color: Colors.black.withValues(alpha: 0.75)),)),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(builder: (context)=> const TenantHistoryDetailPage()) 
-                  );
-                },
-              )
+              // Expanded(child: Text("${widget.order.user!.userId}'s Order")),
+              Expanded(child: Text("$quantity item(s)")),
+              Text(
+                currencyNotifier.value.format(widget.order.totalPrice),
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
             ],
-          )
-        ],  
-      )
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  "Order ID: ${widget.order.paymentId}",
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+                ),
+              ),
+              Text(
+                dateNotifier.value.format(widget.order.createdAt.toLocal().add(Duration(hours: 7))),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

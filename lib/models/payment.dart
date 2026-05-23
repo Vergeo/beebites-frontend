@@ -1,3 +1,4 @@
+import 'package:frontend/models/order.dart';
 import 'package:frontend/models/tenant.dart';
 import 'package:frontend/models/user.dart';
 
@@ -7,6 +8,7 @@ class Payment {
   final int tenantId;
   final Tenant? tenant;
   final User? user;
+  final List<Order>? orders;
   final String paymentType;
   final String status;
   final double totalPrice;
@@ -18,6 +20,7 @@ class Payment {
     required this.tenantId,
     this.tenant,
     this.user,
+    this.orders,
     required this.paymentType,
     required this.status,
     required this.totalPrice,
@@ -43,13 +46,16 @@ class Payment {
           status: status,
           totalPrice: double.parse(totalPrice),
           createdAt: DateTime.parse(createdAt),
-          // FIX: Safely pull nested objects from the 'json' map itself
-          // because they are missing from the raw keys structure
           tenant: json['tenant'] != null
               ? Tenant.fromJson(json['tenant'] as Map<String, dynamic>)
               : null,
           user: json['user'] != null
               ? User.fromJson(json['user'] as Map<String, dynamic>)
+              : null,
+          orders: json['orders'] != null
+              ? (json['orders'] as List)
+                    .map((e) => Order.fromJson(e as Map<String, dynamic>))
+                    .toList()
               : null,
         ),
       _ => throw const FormatException('Failed to load payment.'),

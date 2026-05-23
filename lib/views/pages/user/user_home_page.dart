@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/viewmodels/user/tenant_list.dart';
+import 'package:frontend/views/widgets/glass_text_field_widget.dart';
 import 'package:frontend/views/widgets/user/user_search_bar_widget.dart';
 
 class UserHomePage extends StatefulWidget {
@@ -29,7 +30,13 @@ class _UserHomePageState extends State<UserHomePage> {
                   Text("Ready when you are.", style: TextStyle(fontSize: 24)),
                 ],
               ),
-              UserSearchBarWidget(hintText: "Search Tenant"),
+              GlassTextFieldWidget(
+                height: 50,
+                controller: TextEditingController(),
+                hintText: "Search Tenant",
+                hintTextColor: BeeStyle.gray,
+                style: TextStyle(color: BeeStyle.black),
+              ),
               TenantList(filter: ""),
             ],
           ),

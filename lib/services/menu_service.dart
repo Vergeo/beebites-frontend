@@ -17,4 +17,63 @@ class MenuService {
     }
     return Future.error("Failed to fetch menus!");
   }
+
+  static Future createMenu(
+    String menuName,
+    String menuDescription,
+    String menuImage,
+    int menuPrice,
+    bool isAvailable,
+  ) async {
+    var response = await post(
+      getUri("menu/create-menu"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "tenantId": 1, // change this
+        "menuName": menuName,
+        "menuDescription": menuDescription,
+        "menuImage": menuImage,
+        "menuPrice": menuPrice,
+      }),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return "Menu created successfully";
+    }
+    return Future.error("Failed to create menu!");
+  }
+
+  static Future updateMenu(
+    int menuId,
+    String menuName,
+    String menuDescription,
+    String menuImage,
+    int menuPrice,
+    bool isAvailable,
+  ) async {
+    var response = await patch(
+      getUri("menu/update-menu/$menuId"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "menuName": menuName,
+        "menuDescription": menuDescription,
+        "menuImage": menuImage,
+        "menuPrice": menuPrice,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return "Menu updated successfully";
+    }
+    return Future.error("Failed to udpate menu!");
+  }
+
+  static Future deleteMenu(int menuId) async {
+    var response = await delete(getUri("menu/delete-menu/$menuId"));
+
+    if (response.statusCode == 200) {
+      return "Menu deleted successfully";
+    }
+    return Future.error("Failed to delete menu!");
+  }
 }

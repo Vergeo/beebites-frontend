@@ -3,6 +3,7 @@ import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/views/pages/tenant/tenant_history_page.dart';
 import 'package:frontend/views/pages/tenant/tenant_order_page.dart';
+import 'package:frontend/views/pages/tenant/tenant_product_page.dart';
 import 'package:frontend/views/pages/tenant/tenant_profile_page.dart';
 import 'package:frontend/views/widgets/tenant/tenant_navbar_widget.dart';
 
@@ -14,8 +15,13 @@ class TenantWidgetTree extends StatefulWidget {
 }
 
 class _TenantWidgetTreeState extends State<TenantWidgetTree> {
-  List pages = [TenantOrderPage(), TenantHistoryPage(), TenantProfilePage()];
-  List pageTitles = ["Orders", "History", "Profile"];
+  List pages = [
+    TenantOrderPage(),
+    TenantHistoryPage(),
+    TenantProductPage(),
+    TenantProfilePage(),
+  ];
+  List pageTitles = ["Orders", "History", "Product", "Profile"];
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +29,8 @@ class _TenantWidgetTreeState extends State<TenantWidgetTree> {
       valueListenable: selectedPageNotifier,
       builder: (context, selectedPage, child) {
         return Scaffold(
-          body: Container(
-            color: BeeStyle.white,
-            padding: EdgeInsetsGeometry.only(
-              top: 32,
-              left: 16,
-              right: 16,
-              bottom: 16,
-            ),
-            child: pages[selectedPage],
-          ),
+          backgroundColor: BeeStyle.white,
+          body: SafeArea(child: pages[selectedPage]),
           bottomNavigationBar: TenantNavbarWidget(),
         );
       },

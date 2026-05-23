@@ -17,8 +17,18 @@ class _TenantNavbarWidgetState extends State<TenantNavbarWidget> {
       builder: (context, selectedPage, child) {
         return BottomNavigationBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Orders"),
-            BottomNavigationBarItem(icon: Icon(Icons.history),label: "History",),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list_alt),
+              label: "Orders",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: "History",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.warehouse_rounded),
+              label: "Product",
+            ),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ],
           currentIndex: selectedPage,

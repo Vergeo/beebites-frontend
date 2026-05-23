@@ -1,121 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/notifiers.dart';
+import 'package:frontend/models/payment.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
+import 'package:frontend/views/widgets/tenant/order_status_chip.dart';
 
 class TenantHistoryDetailCard extends StatelessWidget {
-    const TenantHistoryDetailCard({super.key});
+  final Payment order;
 
-    @override
-    Widget build(BuildContext context) {
-      return  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 20,
-        children: [
-          GlassContainerWidget(
-            child: Row(
-              // spacing: 10,
-              children: [
-                Expanded(child: Text("Order ID: 0001")),
-                Container(
-                  width: 65,
-                  height: 15,
-                  decoration: BoxDecoration(
-                    color: BeeStyle.green,
-                    borderRadius: BorderRadius.circular(7)
+  const TenantHistoryDetailCard({super.key, required this.order});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 20,
+      children: [
+        GlassContainerWidget(
+          child: Column(
+            spacing: 8,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "${order.user!.name}'s Order",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 5,
-                    children: [
-                      Icon(Icons.check, size: 10,),
-                      Text("Paid", 
-                        style: TextStyle(
-                          fontSize: 10, 
+                  order.status == "completed"
+                      ? OrderStatusChip(
+                          fillColor: BeeStyle.green,
+                          text: "Completed",
+                        )
+                      : OrderStatusChip(
+                          fillColor: BeeStyle.red,
+                          text: "Cancelled",
                         ),
-                      )
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(child: Text("Order ID: ${order.paymentId}")),
+                  Text(
+                    dateNotifier.value.format(
+                      order.createdAt.toLocal().add(Duration(hours: 7)),
+                    ),
+                  ),
+                  // Text(dateNotifier.value.format(order.createdAt.toLocal())),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        Text("Order Summary"),
+
+        GlassContainerWidget(
+          child: Column(
+            spacing: 8,
+            children: order.orders!
+                .map(
+                  (item) => Row(
+                    spacing: 16,
+                    children: [
+                      Text("${item.quantity}x", style: TextStyle(fontSize: 12)),
+                      Image.network(item.menu.menuImage, width: 40, height: 40),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.menu.menuName,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            Text(
+                              item.notes ?? "No Notes",
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        currencyNotifier.value.format(
+                          item.quantity * item.menu.menuPrice,
+                        ),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ],
                   ),
                 )
-              ],
-            )
+                .toList(),
           ),
+        ),
 
-          Text("Summary"),
+        const Spacer(),
 
-          GlassContainerWidget(
-            child: Column(
-              spacing: 20,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 20,
-                  children: [
-                    Image.asset("assets/images/yishonaya.png", width: 50, height: 50,),
-                    Text("1x",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Original Yakiniku",
-                            style: TextStyle(fontSize: 14),),
-                          Text("No additional notes",
-                            style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                    ),
-                    Text("Rp 58.151",
-                      style: TextStyle(
-                        fontSize: 14
-                      ),
-                    )
-                  ],
-                ),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 20,
-                  children: [
-                    Image.asset("assets/images/yishonaya.png", width: 50, height: 50,),
-                    Text("1x",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Original Yakiniku",
-                            style: TextStyle(fontSize: 14),),
-                          Text("No additional notes",
-                            style: TextStyle(fontSize: 12),)
-                        ],
-                      ),
-                    ),
-                    Text("Rp 58.151",
-                      style: TextStyle(
-                        fontSize: 14
-                      ),
-                    )
-                  ],
-                ),
-                
-              ],
-            ),
+        GlassContainerWidget(
+          child: Row(
+            children: [
+              Expanded(child: Text("Total")),
+              Text(
+                currencyNotifier.value.format(order.totalPrice),
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
-          
-          const Spacer(),
-
-          GlassContainerWidget(
-            child: Row(
-              children: [
-                Expanded(child: Text("Total")),
-                Text("Rp 97.241", style: TextStyle(fontWeight: FontWeight.w600),)
-              ],
-            ),
-          )
-        ],
-      );
-    }
+        ),
+      ],
+    );
+  }
 }

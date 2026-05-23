@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/tenant.dart';
-import 'package:frontend/services/cart_service.dart';
 import 'package:frontend/services/tenant_service.dart';
 import 'package:frontend/views/pages/user/tenant_details.dart';
 import 'package:frontend/views/widgets/user/tenant_card.dart';
@@ -32,7 +31,7 @@ class _TenantListState extends State<TenantList> {
     });
 
     try {
-      final data = await TenantService.getAllTenants();
+      final data = await TenantService.searchTenant(widget.filter);
       setState(() {
         tenants = data;
         isLoading = false;

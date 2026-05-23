@@ -14,6 +14,15 @@ class TenantService {
     return Future.error("Failed to fetch tenants!");
   }
 
+  static Future searchTenant(String keyword) async {
+    var response = await get(getUri("tenants/search-tenants/$keyword"));
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+      return data.map((e) => Tenant.fromJson(e)).toList();
+    }
+    return Future.error("Failed to fetch tenants!");
+  }
+
   static Future getTenant(int tenantId) async {
     var response = await get(getUri("tenants/get-tenant/$tenantId"));
 

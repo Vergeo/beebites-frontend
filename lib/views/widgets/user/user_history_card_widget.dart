@@ -89,7 +89,9 @@ class UserHistoryCardWidget extends StatelessWidget {
             spacing: 8,
             children: [
               Text(
-                DateFormat("d MMMM y").format(payment.createdAt),
+                dateNotifier.value.format(
+                  payment.createdAt.toLocal().add(Duration(hours: 7)),
+                ),
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
               ),
               Text(

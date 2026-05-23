@@ -18,6 +18,19 @@ class PaymentService {
     return Future.error("Failed to fetch payments!");
   }
 
+  static Future getAllPaymentsByTenant(int tenantId) async {
+    var response = await get(
+      getUri("payment/get-all-payments-by-tenant/$tenantId"),
+    );
+
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+
+      return data.map((e) => Payment.fromJson(e)).toList();
+    }
+    return Future.error("Failed to fetch payments!");
+  }
+
   static Future createPayment(
     int userId,
     int tenantId,
@@ -43,5 +56,18 @@ class PaymentService {
     //   r'{"userId": 1, "tenantId": 1, "paymentType": "qris", "paymentId": 31, "status": "pending", "totalPrice": 0.00, "createdAt": "2026-05-18T07:54:31.162Z"}',
     // );
     // return Payment.fromJson(data);
+  }
+
+  static Future updatePaymentStatus(int paymentId, String status) async {
+    var response = await patch(
+      getUri("payment/update-payment-status/$paymentId"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"status": status}),
+    );
+
+    if (response.statusCode == 200) {
+      return "Successfully update payment status!";
+    }
+    return Future.error("Failed to update payment status!");
   }
 }

@@ -8,6 +8,7 @@ class Order {
   final int quantity;
   final DateTime createdAt;
   final Menu menu;
+  final String? notes;
 
   const Order({
     required this.orderId,
@@ -16,6 +17,7 @@ class Order {
     required this.quantity,
     required this.createdAt,
     required this.menu,
+    this.notes,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class Order {
           quantity: quantity,
           createdAt: DateTime.parse(createdAt),
           menu: Menu.fromJson(menu),
+          notes: json['notes'],
         ),
       _ => throw const FormatException('Failed to load order.'),
     };

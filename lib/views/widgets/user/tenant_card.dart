@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
+import 'package:frontend/views/widgets/glass_container_widget.dart';
 
 class TenantCard extends StatefulWidget {
   final VoidCallback? onTap;
@@ -19,10 +20,9 @@ class TenantCard extends StatefulWidget {
 class _TenantCardState extends State<TenantCard> {
   @override
   Widget build(BuildContext context) {
-    return GlassCardWidget(
+    return GlassContainerWidget(
       onTap: widget.onTap,
       height: 100,
-      dark: true,
       child: Row(
         spacing: 16,
         children: [

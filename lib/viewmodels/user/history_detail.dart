@@ -115,7 +115,13 @@ class _HistoryDetailState extends State<HistoryDetail> {
               Row(
                 children: [
                   Expanded(child: Text("Date")),
-                  Text(DateFormat("d MMMM y").format(widget.payment.createdAt)),
+                  Text(
+                    dateNotifier.value.format(
+                      widget.payment.createdAt.toLocal().add(
+                        Duration(hours: 7),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Row(

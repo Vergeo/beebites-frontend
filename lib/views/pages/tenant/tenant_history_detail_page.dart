@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/payment.dart';
 import 'package:frontend/views/widgets/tenant/tenant_history_detail_card.dart';
 
 class TenantHistoryDetailPage extends StatefulWidget {
-  const TenantHistoryDetailPage({super.key});
+  final Payment order;
+
+  const TenantHistoryDetailPage({super.key, required this.order});
 
   @override
-  State<TenantHistoryDetailPage> createState() => _TenantHistoryDetailPageState();
+  State<TenantHistoryDetailPage> createState() =>
+      _TenantHistoryDetailPageState();
 }
 
 class _TenantHistoryDetailPageState extends State<TenantHistoryDetailPage> {
@@ -24,21 +28,19 @@ class _TenantHistoryDetailPageState extends State<TenantHistoryDetailPage> {
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Row(
                     children: [
-                      BackButton(
-                        onPressed: () => Navigator.pop(context),
+                      BackButton(onPressed: () => Navigator.pop(context)),
+                      const Text(
+                        "Transaction Summary",
+                        style: TextStyle(fontSize: 24),
                       ),
-                      const Text("Transaction Summary", style: TextStyle(fontSize: 24)),
                     ],
                   ),
                 ),
               ),
 
-              const SliverFillRemaining(
+              SliverFillRemaining(
                 hasScrollBody: false,
-                child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: TenantHistoryDetailCard(),
-                ),
+                child: TenantHistoryDetailCard(order: widget.order),
               ),
             ],
           ),
