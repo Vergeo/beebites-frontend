@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/viewmodels/tenant/menu_list.dart';
 import 'package:frontend/views/pages/tenant/tenant_edit_item_page.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
@@ -30,7 +31,7 @@ class _TenantProductPageState extends State<TenantProductPage> {
         spacing: 16,
         children: [
           Text("Your Products", style: TextStyle(fontSize: 24)),
-          MenuList(tenantId: 1),
+          MenuList(tenantId: currentTenantNotifier.value!.tenantId),
         ],
       ),
     );

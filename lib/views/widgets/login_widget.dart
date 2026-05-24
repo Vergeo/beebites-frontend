@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/services/auth_service.dart';
+import 'package:frontend/services/tenant_service.dart';
+import 'package:frontend/views/pages/tenant/tenant_widget_tree.dart';
 import 'package:frontend/views/pages/user/user_widget_tree.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/glass_text_field_widget.dart';
@@ -42,14 +45,25 @@ class _LoginWidgetState extends State<LoginWidget> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Login Successful"),
-            backgroundColor: BeeStyle.green,
+            backgroundColor: Colors.green,
           ),
         );
       }
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const UserWidgetTree()),
-      );
+      selectedPageNotifier.value = 0;
+      if (currentUserNotifier.value!.role == "tenant") {
+        currentTenantNotifier.value = await TenantService.getTenantByUser(
+          currentUserNotifier.value!.userId,
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const TenantWidgetTree()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const UserWidgetTree()),
+        );
+      }
     } catch (error) {
       setState(() {
         errorMessage = error.toString();

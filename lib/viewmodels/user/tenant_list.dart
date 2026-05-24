@@ -24,6 +24,12 @@ class _TenantListState extends State<TenantList> {
     loadTenants();
   }
 
+  @override
+  void didUpdateWidget(covariant TenantList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    loadTenants();
+  }
+
   void loadTenants() async {
     setState(() {
       isLoading = true;
@@ -31,7 +37,13 @@ class _TenantListState extends State<TenantList> {
     });
 
     try {
-      final data = await TenantService.searchTenant(widget.filter);
+      var data;
+      if (widget.filter.isEmpty) {
+        data = await TenantService.getAllTenants();
+      } else {
+        data = await TenantService.searchTenant(widget.filter);
+      }
+
       setState(() {
         tenants = data;
         isLoading = false;
@@ -75,8 +87,7 @@ class _TenantListState extends State<TenantList> {
           spacing: 16.0,
           children: tenants!.map((tenant) {
             return TenantCard(
-              tenantName: tenant.tenantName,
-              tenantLogo: tenant.tenantLogo,
+              tenant: tenant,
               onTap: () {
                 Navigator.push(
                   context,

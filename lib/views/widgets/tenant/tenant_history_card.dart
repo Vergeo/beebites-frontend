@@ -5,7 +5,6 @@ import 'package:frontend/models/payment.dart';
 import 'package:frontend/views/pages/tenant/tenant_history_detail_page.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/tenant/order_status_chip.dart';
-import 'package:intl/intl.dart';
 
 class TenantHistoryCard extends StatefulWidget {
   final Payment order;
@@ -78,7 +77,9 @@ class _TenantHistoryCardState extends State<TenantHistoryCard> {
                 ),
               ),
               Text(
-                dateNotifier.value.format(widget.order.createdAt.toLocal().add(Duration(hours: 7))),
+                dateNotifier.value.format(
+                  widget.order.createdAt.toLocal().add(Duration(hours: 7)),
+                ),
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
               ),
             ],

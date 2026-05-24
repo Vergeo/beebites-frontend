@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/viewmodels/user/tenant_list.dart';
+import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/glass_text_field_widget.dart';
-import 'package:frontend/views/widgets/user/user_search_bar_widget.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage({super.key});
@@ -12,6 +12,15 @@ class UserHomePage extends StatefulWidget {
 }
 
 class _UserHomePageState extends State<UserHomePage> {
+  final tenantSearchController = TextEditingController();
+  String keyword = "";
+
+  @override
+  void dispose() {
+    super.dispose();
+    tenantSearchController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,14 +39,33 @@ class _UserHomePageState extends State<UserHomePage> {
                   Text("Ready when you are.", style: TextStyle(fontSize: 24)),
                 ],
               ),
-              GlassTextFieldWidget(
-                height: 50,
-                controller: TextEditingController(),
-                hintText: "Search Tenant",
-                hintTextColor: BeeStyle.gray,
-                style: TextStyle(color: BeeStyle.black),
+              Row(
+                spacing: 8,
+                children: [
+                  Expanded(
+                    child: GlassTextFieldWidget(
+                      height: 50,
+                      controller: tenantSearchController,
+                      hintText: "Search Tenant",
+                      hintTextColor: BeeStyle.gray,
+                      style: TextStyle(color: BeeStyle.black),
+                    ),
+                  ),
+                  GlassContainerWidget(
+                    borderRadius: 100,
+                    padding: EdgeInsetsGeometry.all(8),
+                    height: 50,
+                    width: 50,
+                    onTap: () => {
+                      setState(() {
+                        keyword = tenantSearchController.text.trim();
+                      }),
+                    },
+                    child: Icon(Icons.search),
+                  ),
+                ],
               ),
-              TenantList(filter: ""),
+              TenantList(filter: keyword),
             ],
           ),
         ),

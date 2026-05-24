@@ -88,6 +88,5 @@ class _HistoryListState extends State<HistoryList> {
       //   return UserHistoryCardWidget(payment: payment);
       // }).toList(),
     );
-    ;
   }
 }

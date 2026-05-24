@@ -53,7 +53,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("Register Successful"),
-            backgroundColor: BeeStyle.green,
+            backgroundColor: Colors.green,
           ),
         );
       }
@@ -92,10 +92,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
           GlassTextFieldWidget(hintText: "Email", controller: emailController),
           GlassTextFieldWidget(
             hintText: "Password",
+            obscureText: true,
             controller: passwordController,
           ),
           GlassTextFieldWidget(
             hintText: "Confirm Password",
+            obscureText: true,
             controller: confirmPasswordController,
           ),
           GlassContainerWidget(

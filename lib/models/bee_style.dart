@@ -21,4 +21,5 @@ class BeeStyle {
 
   static const Color green = Color.fromRGBO(157, 255, 160, 0.75);
   static const Color red = Color.fromRGBO(255, 157, 157, 0.75);
+  static const Color yellow = Color.fromRGBO(255, 255, 157, 0.75);
 }

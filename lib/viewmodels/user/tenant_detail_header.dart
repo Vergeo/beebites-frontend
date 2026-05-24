@@ -77,7 +77,7 @@ class _TenantDetailHeaderState extends State<TenantDetailHeader> {
                   ],
                 ),
               ),
-              Image.asset(tenant.tenantLogo, width: 75, height: 75),
+              Image.network(tenant.tenantLogo, width: 75, height: 75),
             ],
           );
         }

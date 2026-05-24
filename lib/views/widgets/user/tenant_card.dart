@@ -1,88 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/payment.dart';
+import 'package:frontend/models/tenant.dart';
+import 'package:frontend/services/payment_service.dart';
 import 'package:frontend/views/widgets/glass_card_widget.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 
 class TenantCard extends StatefulWidget {
   final VoidCallback? onTap;
-  final String tenantName;
-  final String tenantLogo;
-  const TenantCard({
-    super.key,
-    this.onTap,
-    required this.tenantName,
-    required this.tenantLogo,
-  });
+  final Tenant tenant;
+  const TenantCard({super.key, this.onTap, required this.tenant});
 
   @override
   State<TenantCard> createState() => _TenantCardState();
 }
 
 class _TenantCardState extends State<TenantCard> {
+  int queueTime = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getQueueTime();
+  }
+
+  void getQueueTime() async {
+    try {
+      List<Payment> payments = await PaymentService.getAllPaymentsByTenant(
+        widget.tenant.tenantId,
+      );
+
+      int count = 0;
+
+      for (var payment in payments) {
+        if (payment.status == "processing") {
+          count += 1;
+        }
+      }
+
+      setState(() {
+        queueTime = 5 + count * 2;
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GlassContainerWidget(
       onTap: widget.onTap,
-      height: 100,
       child: Row(
         spacing: 16,
         children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              widget.tenant.tenantLogo,
+              fit: BoxFit.cover,
+              width: 70,
+              height: 70,
+            ),
+          ),
           Expanded(
-            child: Row(
-              spacing: 8,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(widget.tenantLogo, width: 75, height: 75),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.tenantName,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.access_time_sharp, size: 16),
-                        const SizedBox(width: 4),
-                        Text(
-                          "5 min",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                Text(widget.tenant.tenantName, style: TextStyle(fontSize: 20)),
+                Text(
+                  widget.tenant.tenantDescription,
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Color.fromARGB(255, 255, 226, 157),
-            ),
-            width: 50,
-            height: 23,
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 15,
-                  color: Color.fromARGB(255, 255, 102, 0),
-                ),
-                SizedBox(width: 1),
-                Text("5.0"),
-              ],
-            ),
+          Row(
+            children: [
+              Icon(Icons.access_time_sharp, size: 16),
+              const SizedBox(width: 4),
+              Text(
+                "$queueTime min",
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+              ),
+            ],
           ),
         ],
       ),

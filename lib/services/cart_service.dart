@@ -35,6 +35,12 @@ class CartService {
     String notes,
     Menu menu,
   ) async {
+    if (selectedTenantNotifier.value != null &&
+        selectedTenantNotifier.value != menu.tenantId &&
+        cartNotifier.value.isNotEmpty) {
+      return Future.error("You cannot select menu from different tenants!");
+    }
+
     List<Cart> backupList = List.from(cartNotifier.value);
     int? backupTenantId = selectedTenantNotifier.value;
 
@@ -100,6 +106,18 @@ class CartService {
       selectedTenantNotifier.value = backupTenantId;
       return Future.error("Failed to update cart!");
     }
+  }
+
+  static Future emptyCart(int userId) async {
+    var response = await delete(getUri("cart/empty-cart/$userId"));
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      itemCountNotifier.value = 0;
+      totalPriceNotifier.value = 0;
+      cartNotifier.value = List.from([]);
+      return "Cart emptied successful!";
+    }
+    return Future.error("Failed to empty cart!");
   }
 
   static Future checkout(int userId, int paymentId) async {

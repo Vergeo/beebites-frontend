@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/models/payment.dart';
 import 'package:frontend/services/payment_service.dart';
 import 'package:frontend/views/widgets/tenant/tenant_history_card.dart';
@@ -34,7 +35,7 @@ class _HistoryListState extends State<HistoryList> {
     });
     try {
       final List<Payment> data = await PaymentService.getAllPaymentsByTenant(
-        1, // change this
+        currentTenantNotifier.value!.tenantId,
       );
 
       final completedOrdersTemp = data

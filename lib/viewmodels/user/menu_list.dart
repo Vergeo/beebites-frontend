@@ -5,8 +5,9 @@ import 'package:frontend/views/widgets/user/tenant_food_item.dart';
 
 class MenuList extends StatefulWidget {
   final int tenantId;
+  final String filter;
 
-  const MenuList({super.key, required this.tenantId});
+  const MenuList({super.key, required this.tenantId, required this.filter});
 
   @override
   State<MenuList> createState() => _MenuListState();
@@ -23,6 +24,12 @@ class _MenuListState extends State<MenuList> {
     loadMenus();
   }
 
+  @override
+  void didUpdateWidget(covariant MenuList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    loadMenus();
+  }
+
   void loadMenus() async {
     setState(() {
       isLoading = true;
@@ -30,7 +37,12 @@ class _MenuListState extends State<MenuList> {
     });
 
     try {
-      final data = await MenuService.getAllMenusFromTenant(widget.tenantId);
+      var data;
+      if (widget.filter.isEmpty) {
+        data = await MenuService.getAllMenusFromTenant(widget.tenantId);
+      } else {
+        data = await MenuService.searchMenu(widget.tenantId, widget.filter);
+      }
       setState(() {
         menus = data;
         isLoading = false;

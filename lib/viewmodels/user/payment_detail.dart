@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/notifiers.dart';
-import 'package:frontend/models/order.dart';
 import 'package:frontend/models/tenant.dart';
-import 'package:frontend/services/cart_service.dart';
 import 'package:frontend/services/tenant_service.dart';
 import 'package:frontend/views/widgets/glass_container_widget.dart';
 

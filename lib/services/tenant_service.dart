@@ -31,6 +31,78 @@ class TenantService {
 
       return Tenant.fromJson(data);
     }
+    // return Future.error(jsonDecode(response.body)["message"]);
     return Future.error("Failed to fetch tenant!");
+  }
+
+  static Future getTenantByUser(int userId) async {
+    var response = await get(getUri("tenants/get-tenant-by-user/$userId"));
+
+    if (response.statusCode == 200) {
+      dynamic data = jsonDecode(response.body);
+
+      return Tenant.fromJson(data);
+    }
+    // return Future.error(jsonDecode(response.body)["message"]);
+    return Future.error("Failed to fetch tenant!");
+  }
+
+  static Future createTenant(
+    int userId,
+    String tenantName,
+    String tenantDescription,
+    String tenantLogo,
+    String tenantOpenTime,
+    String tenantCloseTime,
+  ) async {
+    var response = await post(
+      getUri("tenants/create-tenant"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "userId": userId,
+        "tenantName": tenantName,
+        "tenantDescription": tenantDescription,
+        "tenantLogo": tenantLogo,
+        "tenantOpenTime": tenantOpenTime,
+        "tenantCloseTime": tenantCloseTime,
+      }),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      dynamic data = jsonDecode(response.body);
+
+      return Tenant.fromJson(data);
+    }
+    return Future.error(jsonDecode(response.body)["message"]);
+    // return Future.error("Failed to fetch tenant!");
+  }
+
+  static Future updateTenant(
+    int tenantId,
+    String tenantName,
+    String tenantDescription,
+    String tenantLogo,
+    String tenantOpenTime,
+    String tenantCloseTime,
+  ) async {
+    var response = await patch(
+      getUri("tenants/update-tenant/$tenantId"),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "tenantName": tenantName,
+        "tenantDescription": tenantDescription,
+        "tenantLogo": tenantLogo,
+        "tenantOpenTime": tenantOpenTime,
+        "tenantCloseTime": tenantCloseTime,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      dynamic data = jsonDecode(response.body);
+
+      return Tenant.fromJson(data);
+    }
+    return Future.error(jsonDecode(response.body)["message"]);
+    // return Future.error("Failed to fetch tenant!");
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/models/payment.dart';
 import 'package:frontend/services/payment_service.dart';
 import 'package:frontend/views/widgets/tenant/tenant_order_card_widget.dart';
@@ -29,7 +30,7 @@ class _OrderListState extends State<OrderList> {
     });
     try {
       final List<Payment> data = await PaymentService.getAllPaymentsByTenant(
-        1, // change this
+        currentTenantNotifier.value!.tenantId,
       );
 
       final newOrdersTemp = data

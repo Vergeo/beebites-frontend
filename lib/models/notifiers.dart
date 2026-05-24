@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/cart.dart';
+import 'package:frontend/models/tenant.dart';
 import 'package:frontend/models/user.dart';
 import 'package:intl/intl.dart';
 
@@ -11,6 +12,7 @@ ValueNotifier<int> totalPriceNotifier = ValueNotifier(0);
 ValueNotifier<int?> selectedTenantNotifier = ValueNotifier(null);
 
 ValueNotifier<User?> currentUserNotifier = ValueNotifier(null);
+ValueNotifier<Tenant?> currentTenantNotifier = ValueNotifier(null);
 ValueNotifier<NumberFormat> currencyNotifier = ValueNotifier(
   NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp "),
 );

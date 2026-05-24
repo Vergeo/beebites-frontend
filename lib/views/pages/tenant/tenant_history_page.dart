@@ -15,7 +15,7 @@ class _TenantHistoryPageState extends State<TenantHistoryPage> {
     return ScrollablePageWidget(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 10,
+        spacing: 16,
         children: [
           Text("History", style: TextStyle(fontSize: 24)),
           // Text("March, 7th 2026"),

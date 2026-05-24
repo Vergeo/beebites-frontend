@@ -1,5 +1,4 @@
 import 'package:frontend/models/menus.dart';
-import 'package:frontend/models/payment.dart';
 
 class Order {
   final int orderId;

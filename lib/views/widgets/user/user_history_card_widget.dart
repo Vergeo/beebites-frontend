@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/models/payment.dart';
 import 'package:frontend/views/pages/user/user_history_detail.dart';
@@ -13,11 +14,11 @@ class UserHistoryCardWidget extends StatelessWidget {
   Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case 'processing':
-        return const Color.fromARGB(100, 255, 226, 157);
+        return BeeStyle.yellow;
       case 'completed':
-        return const Color.fromARGB(75, 175, 255, 157);
+        return BeeStyle.green;
       case 'cancelled':
-        return const Color.fromARGB(75, 255, 157, 157);
+        return BeeStyle.red;
       default:
         return Colors.grey.withValues(alpha: 0.3);
     }
@@ -50,10 +51,13 @@ class UserHistoryCardWidget extends StatelessWidget {
       child: Row(
         spacing: 16,
         children: [
-          SizedBox(
-            width: 60,
-            height: 60,
-            child: Image.asset(payment.tenant!.tenantLogo),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network(
+              payment.tenant!.tenantLogo,
+              width: 70,
+              height: 70,
+            ),
           ),
           Expanded(
             child: Column(

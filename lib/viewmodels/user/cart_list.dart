@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/notifiers.dart';
-import 'package:frontend/models/payment.dart';
-import 'package:frontend/services/cart_service.dart';
-import 'package:frontend/services/payment_service.dart';
-import 'package:frontend/views/widgets/glass_container_widget.dart';
 import 'package:frontend/views/widgets/user/user_cart_item.dart';
 
 class CartList extends StatefulWidget {

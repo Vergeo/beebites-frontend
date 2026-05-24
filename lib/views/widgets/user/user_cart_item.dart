@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/bee_style.dart';
 import 'package:frontend/models/cart.dart';
 import 'package:frontend/models/menus.dart';
 import 'package:frontend/models/notifiers.dart';
@@ -16,53 +17,60 @@ class UserCartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassContainerWidget(
       padding: EdgeInsetsGeometry.all(8),
-      height: 100,
       child: Row(
+        spacing: 16,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: Row(
-              spacing: 16,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Image.network(cart.menu.menuImage),
-                ),
+          Image.network(cart.menu.menuImage, width: 70, height: 70),
 
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  cart.menu.menuName,
+                  style: const TextStyle(fontSize: 12),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Row(
                   children: [
-                    Text(cart.menu.menuName, style: TextStyle(fontSize: 12)),
-                    Row(
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            text: 'Add Note',
-                            style: TextStyle(
-                              fontSize: 8,
-                              color: Colors.black54,
-                              decoration: TextDecoration.underline,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                //cascade notation (from stackoverflow idk)
-                              },
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Icon(Icons.edit, size: 12, color: Colors.black54),
-                      ],
+                    Text(
+                      "Add Note",
+                      style: TextStyle(
+                        fontSize: 8,
+                        color: BeeStyle.gray,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
+                    SizedBox(width: 5),
+                    Icon(Icons.edit, size: 12, color: BeeStyle.gray),
                   ],
                 ),
+                // Row(
+                //   children: [
+                //     RichText(
+                //       text: TextSpan(
+                //         text: 'Add Note',
+                //         style: TextStyle(
+                //           fontSize: 8,
+                //           color: Colors.black54,
+                //           decoration: TextDecoration.underline,
+                //         ),
+                //         recognizer: TapGestureRecognizer()
+                //           ..onTap = () {
+                //             //cascade notation (from stackoverflow idk)
+                //           },
+                //       ),
+                //     ),
+                //     SizedBox(width: 5),
+                //     Icon(Icons.edit, size: 12, color: Colors.black54),
+                //   ],
+                // ),
               ],
             ),
           ),
-
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

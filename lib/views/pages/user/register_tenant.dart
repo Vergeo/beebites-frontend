@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/notifiers.dart';
-import 'package:frontend/viewmodels/tenant/edit_tenant.dart';
+import 'package:frontend/viewmodels/user/new_tenant.dart';
 import 'package:frontend/views/widgets/scrollable_page_widget.dart';
 
-class TenantEditProfileInfoPage extends StatefulWidget {
-  const TenantEditProfileInfoPage({super.key});
+class RegisterTenant extends StatefulWidget {
+  const RegisterTenant({super.key});
 
   @override
-  State<TenantEditProfileInfoPage> createState() =>
-      _TenantEditProfileInfoPageState();
+  State<RegisterTenant> createState() => _RegisterTenantState();
 }
 
-class _TenantEditProfileInfoPageState extends State<TenantEditProfileInfoPage> {
+class _RegisterTenantState extends State<RegisterTenant> {
   @override
   Widget build(BuildContext context) {
     return ScrollablePageWidget(
@@ -27,10 +25,10 @@ class _TenantEditProfileInfoPageState extends State<TenantEditProfileInfoPage> {
                   Navigator.pop(context);
                 },
               ),
-              Text("Edit Tenant Info", style: TextStyle(fontSize: 24)),
+              Text("Create New Tenant", style: TextStyle(fontSize: 24)),
             ],
           ),
-          EditTenant(tenant: currentTenantNotifier.value!),
+          NewTenant(),
         ],
       ),
     );

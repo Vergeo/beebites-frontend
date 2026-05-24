@@ -16,22 +16,35 @@ class TenantFoodItem extends StatefulWidget {
 }
 
 class _TenantFoodItemState extends State<TenantFoodItem> {
+  void addButtonClicked() async {
+    try {
+      await CartService.addMenuToCart(
+        currentUserNotifier.value!.userId,
+        widget.menu.menuId,
+        widget.menu.tenantId,
+        1,
+        "",
+        widget.menu,
+      );
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.toString()),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
+  }
+
   Widget buildAddButton() {
     return GlassContainerWidget(
       height: 30,
       width: 30,
       borderRadius: 1000,
       padding: EdgeInsetsGeometry.all(0),
-      onTap: () => {
-        CartService.addMenuToCart(
-          currentUserNotifier.value!.userId,
-          widget.menu.menuId,
-          widget.menu.tenantId,
-          1,
-          "",
-          widget.menu,
-        ),
-      },
+      onTap: addButtonClicked,
       child: Center(child: Icon(Icons.add, color: Colors.black, size: 16)),
     );
   }

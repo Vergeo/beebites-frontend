@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:frontend/models/menus.dart';
+import 'package:frontend/models/notifiers.dart';
 import 'package:frontend/services/base_api.dart';
 import 'package:http/http.dart';
 
@@ -29,7 +30,7 @@ class MenuService {
       getUri("menu/create-menu"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({
-        "tenantId": 1, // change this
+        "tenantId": currentTenantNotifier.value!.tenantId,
         "menuName": menuName,
         "menuDescription": menuDescription,
         "menuImage": menuImage,
@@ -41,6 +42,17 @@ class MenuService {
       return "Menu created successfully";
     }
     return Future.error("Failed to create menu!");
+  }
+
+  static Future searchMenu(int tenantId, String keyword) async {
+    var response = await get(
+      getUri("menu/search-menus-from-tenant/$tenantId/$keyword"),
+    );
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+      return data.map((e) => Menu.fromJson(e)).toList();
+    }
+    return Future.error("Failed to fetch menu!");
   }
 
   static Future updateMenu(
