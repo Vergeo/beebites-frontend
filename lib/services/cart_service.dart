@@ -9,7 +9,10 @@ import 'package:http/http.dart';
 
 class CartService {
   static Future getCartFromUser(int userId) async {
-    var response = await get(getUri("cart/get-cart-by-user/$userId"));
+    var response = await get(
+      getUri("cart/get-cart-by-user/$userId"),
+      headers: getHeaders(),
+    );
     // print(response.statusCode);
     itemCountNotifier.value = 0;
     totalPriceNotifier.value = 0;
@@ -88,7 +91,7 @@ class CartService {
     try {
       var response = await post(
         getUri("cart/add-menu-to-cart/$userId"),
-        headers: {"Content-Type": "application/json"},
+        headers: getHeaders(),
         body: jsonEncode({
           "menuId": menuId,
           "quantity": quantity,
@@ -109,7 +112,10 @@ class CartService {
   }
 
   static Future emptyCart(int userId) async {
-    var response = await delete(getUri("cart/empty-cart/$userId"));
+    var response = await delete(
+      getUri("cart/empty-cart/$userId"),
+      headers: getHeaders(),
+    );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       itemCountNotifier.value = 0;
@@ -127,7 +133,7 @@ class CartService {
 
     var response = await post(
       getUri("cart/checkout"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({"userId": userId, "paymentId": paymentId}),
     );
 

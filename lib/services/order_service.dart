@@ -6,7 +6,10 @@ import 'package:http/http.dart';
 
 class OrderService {
   static Future getOrders(int paymentId) async {
-    var response = await get(getUri("order/get-orders-by-payment/$paymentId"));
+    var response = await get(
+      getUri("order/get-orders-by-payment/$paymentId"),
+      headers: getHeaders(),
+    );
 
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);

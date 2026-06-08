@@ -6,7 +6,10 @@ import 'package:http/http.dart';
 
 class TenantService {
   static Future getAllTenants() async {
-    var response = await get(getUri("tenants/get-all-tenants"));
+    var response = await get(
+      getUri("tenants/get-all-tenants"),
+      headers: getHeaders(),
+    );
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
       return data.map((e) => Tenant.fromJson(e)).toList();
@@ -15,7 +18,10 @@ class TenantService {
   }
 
   static Future searchTenant(String keyword) async {
-    var response = await get(getUri("tenants/search-tenants/$keyword"));
+    var response = await get(
+      getUri("tenants/search-tenants/$keyword"),
+      headers: getHeaders(),
+    );
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
       return data.map((e) => Tenant.fromJson(e)).toList();
@@ -24,7 +30,10 @@ class TenantService {
   }
 
   static Future getTenant(int tenantId) async {
-    var response = await get(getUri("tenants/get-tenant/$tenantId"));
+    var response = await get(
+      getUri("tenants/get-tenant/$tenantId"),
+      headers: getHeaders(),
+    );
 
     if (response.statusCode == 200) {
       dynamic data = jsonDecode(response.body);
@@ -36,7 +45,10 @@ class TenantService {
   }
 
   static Future getTenantByUser(int userId) async {
-    var response = await get(getUri("tenants/get-tenant-by-user/$userId"));
+    var response = await get(
+      getUri("tenants/get-tenant-by-user/$userId"),
+      headers: getHeaders(),
+    );
 
     if (response.statusCode == 200) {
       dynamic data = jsonDecode(response.body);
@@ -57,7 +69,7 @@ class TenantService {
   ) async {
     var response = await post(
       getUri("tenants/create-tenant"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({
         "userId": userId,
         "tenantName": tenantName,
@@ -87,7 +99,7 @@ class TenantService {
   ) async {
     var response = await patch(
       getUri("tenants/update-tenant/$tenantId"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({
         "tenantName": tenantName,
         "tenantDescription": tenantDescription,

@@ -9,6 +9,7 @@ class MenuService {
   static Future getAllMenusFromTenant(int tenantId) async {
     var response = await get(
       getUri("menu/get-all-menus-from-tenant/$tenantId"),
+      headers: getHeaders(),
     );
 
     if (response.statusCode == 200) {
@@ -28,7 +29,7 @@ class MenuService {
   ) async {
     var response = await post(
       getUri("menu/create-menu"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({
         "tenantId": currentTenantNotifier.value!.tenantId,
         "menuName": menuName,
@@ -47,6 +48,7 @@ class MenuService {
   static Future searchMenu(int tenantId, String keyword) async {
     var response = await get(
       getUri("menu/search-menus-from-tenant/$tenantId/$keyword"),
+      headers: getHeaders(),
     );
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
@@ -65,7 +67,7 @@ class MenuService {
   ) async {
     var response = await patch(
       getUri("menu/update-menu/$menuId"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({
         "menuName": menuName,
         "menuDescription": menuDescription,
@@ -81,7 +83,10 @@ class MenuService {
   }
 
   static Future deleteMenu(int menuId) async {
-    var response = await delete(getUri("menu/delete-menu/$menuId"));
+    var response = await delete(
+      getUri("menu/delete-menu/$menuId"),
+      headers: getHeaders(),
+    );
 
     if (response.statusCode == 200) {
       return "Menu deleted successfully";

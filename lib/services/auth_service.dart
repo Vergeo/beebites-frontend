@@ -50,7 +50,7 @@ class AuthService {
   static Future registerUserAsTenant(int userId) async {
     var response = await patch(
       getUri("users/update-user/$userId"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({"role": "tenant"}),
     );
 

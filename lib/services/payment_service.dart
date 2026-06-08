@@ -8,6 +8,7 @@ class PaymentService {
   static Future getAllPaymentsByUser(int userId) async {
     var response = await get(
       getUri("payment/get-all-payments-by-user/$userId"),
+      headers: getHeaders(),
     );
 
     if (response.statusCode == 200) {
@@ -21,6 +22,7 @@ class PaymentService {
   static Future getAllPaymentsByTenant(int tenantId) async {
     var response = await get(
       getUri("payment/get-all-payments-by-tenant/$tenantId"),
+      headers: getHeaders(),
     );
 
     if (response.statusCode == 200) {
@@ -38,7 +40,7 @@ class PaymentService {
   ) async {
     var response = await post(
       getUri("payment/create-payment"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({
         "userId": userId,
         "tenantId": tenantId,
@@ -61,7 +63,7 @@ class PaymentService {
   static Future updatePaymentStatus(int paymentId, String status) async {
     var response = await patch(
       getUri("payment/update-payment-status/$paymentId"),
-      headers: {"Content-Type": "application/json"},
+      headers: getHeaders(),
       body: jsonEncode({"status": status}),
     );
 
