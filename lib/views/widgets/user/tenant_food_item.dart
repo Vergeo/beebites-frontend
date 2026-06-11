@@ -76,7 +76,9 @@ class _TenantFoodItemState extends State<TenantFoodItem> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                         child: Image.network(
                           widget.menu.menuImage,
-                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
