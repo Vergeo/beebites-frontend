@@ -20,46 +20,49 @@ class _LoginRegisterPageState extends State<LoginRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return ScrollablePageWidget(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 200,
-              height: 200,
-              child: Image.asset("assets/images/beebites_white.png"),
-            ),
-            GlassContainerWidget(
-              padding: EdgeInsetsGeometry.all(0),
-              borderRadius: 100,
-              dark: true,
-              child: AnimatedHorizontalToggle(
-                background: Color.fromRGBO(0, 0, 0, 0),
-                activeColor: const Color.fromRGBO(255, 255, 255, 0.2),
-                activeBorder: Border.all(
-                  color: const Color.fromRGBO(255, 255, 255, 0.5),
-                  width: 1,
-                ),
-                activeTextStyle: TextStyle(color: BeeStyle.lightWhite),
-                inActiveTextStyle: TextStyle(color: BeeStyle.lightWhite),
-                taps: ["Login", "Register"],
-                radius: 200,
-                activeButtonRadius: 200,
-                width: 300,
-                height: 50,
-                duration: Duration(milliseconds: 30),
-                onChange: (int currentIndex, int targetIndex) {
-                  setState(() {
-                    currentWidget = targetIndex;
-                  });
-                },
+      child: Container(
+        color: BeeStyle.blue,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Image.asset("assets/images/beebites_white.png"),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 64),
-              child: widgets[currentWidget],
-            ),
-          ],
+              GlassContainerWidget(
+                padding: EdgeInsetsGeometry.all(0),
+                borderRadius: 100,
+                dark: true,
+                child: AnimatedHorizontalToggle(
+                  background: Color.fromRGBO(0, 0, 0, 0),
+                  activeColor: const Color.fromRGBO(255, 255, 255, 0.2),
+                  activeBorder: Border.all(
+                    color: const Color.fromRGBO(255, 255, 255, 0.5),
+                    width: 1,
+                  ),
+                  activeTextStyle: TextStyle(color: BeeStyle.lightWhite),
+                  inActiveTextStyle: TextStyle(color: BeeStyle.lightWhite),
+                  taps: ["Login", "Register"],
+                  radius: 200,
+                  activeButtonRadius: 200,
+                  width: 300,
+                  height: 50,
+                  duration: Duration(milliseconds: 30),
+                  onChange: (int currentIndex, int targetIndex) {
+                    setState(() {
+                      currentWidget = targetIndex;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 64),
+                child: widgets[currentWidget],
+              ),
+            ],
+          ),
         ),
       ),
     );
