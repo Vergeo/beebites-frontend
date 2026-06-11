@@ -1,3 +1,4 @@
+import 'dart:ui'; // Required for ImageFilter
 import 'package:flutter/material.dart';
 
 class GlassContainerWidget extends StatelessWidget {
@@ -12,6 +13,8 @@ class GlassContainerWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final Widget? child;
   final bool dark;
+  final double blurX; // Added to customize horizontal blur intensity
+  final double blurY; // Added to customize vertical blur intensity
 
   const GlassContainerWidget({
     super.key,
@@ -33,6 +36,8 @@ class GlassContainerWidget extends StatelessWidget {
     this.onTap,
     this.child,
     this.dark = false,
+    this.blurX = 10.0, // Default comfortable blur
+    this.blurY = 10.0,
   });
 
   @override
@@ -47,18 +52,26 @@ class GlassContainerWidget extends StatelessWidget {
           borderRadius: borderRadius,
           boxShadows: boxShadows,
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: dark ? Color.fromRGBO(26, 26, 26, 0.1) : fillColor,
-            borderRadius: BorderRadius.all(radius),
-            border: Border.all(color: strokeColor, width: strokeWidth),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.all(radius),
-              onTap: onTap,
-              child: Padding(padding: padding, child: child),
+        // 1. ClipRRect stops the backdrop blur from bleeding into the rest of the screen
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(radius),
+          child: BackdropFilter(
+            // 2. ImageFilter.blur applies the glass effect to anything beneath this widget
+            filter: ImageFilter.blur(sigmaX: blurX, sigmaY: blurY),
+            child: Container(
+              decoration: BoxDecoration(
+                color: dark ? const Color.fromRGBO(26, 26, 26, 0.1) : fillColor,
+                borderRadius: BorderRadius.all(radius),
+                border: Border.all(color: strokeColor, width: strokeWidth),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.all(radius),
+                  onTap: onTap,
+                  child: Padding(padding: padding, child: child),
+                ),
+              ),
             ),
           ),
         ),

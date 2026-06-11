@@ -34,20 +34,20 @@ class UserCartItem extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Add Note",
-                      style: TextStyle(
-                        fontSize: 8,
-                        color: BeeStyle.gray,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Icon(Icons.edit, size: 12, color: BeeStyle.gray),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       "Add Note",
+                //       style: TextStyle(
+                //         fontSize: 8,
+                //         color: BeeStyle.gray,
+                //         decoration: TextDecoration.underline,
+                //       ),
+                //     ),
+                //     SizedBox(width: 5),
+                //     Icon(Icons.edit, size: 12, color: BeeStyle.gray),
+                //   ],
+                // ),
                 // Row(
                 //   children: [
                 //     RichText(
