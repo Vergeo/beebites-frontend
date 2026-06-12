@@ -7,13 +7,14 @@ import 'package:http/http.dart';
 
 class AuthService {
   static Future login(String email, String password) async {
+    print("LOGIN");
     var response = await post(
       getUri("auth/login"),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode({"email": email, "password": password}),
     );
 
-    // print(response.statusCode);
+    print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = jsonDecode(response.body);
       currentUserNotifier.value = User.fromJson(data["user"]);
