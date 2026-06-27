@@ -32,10 +32,10 @@ dependencies:
     sdk: flutter
   animated_toggle: ^0.1.3
   glassmorphism: ^2.0.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  device_preview: ^1.3.1
+  http: ^1.6.0
   cupertino_icons: ^1.0.8
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
