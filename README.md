@@ -1,16 +1,55 @@
-# frontend
+## 🛠️ Installation & Setup
 
-A new Flutter project.
+Follow these steps sequentially to set up the project locally:
 
-## Getting Started
+### 1. Clone the Repository
 
-This project is a starting point for a Flutter application.
+First, clone this repository to your local machine using Git:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+git clone https://github.com/Vergeo/beebites-frontend
+cd beebites-frontend
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2. Install Dependencies
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Fetch all the required packages and dependencies listed in the `pubspec.yaml` file:
+
+```bash
+flutter pub get
+```
+
+### 3. Launch the Emulator or Connect a Device
+
+You can either connect a physical Android device or launch an Android simulator.
+
+To list available emulators, run:
+
+```bash
+flutter emulators
+```
+
+To launch a specific emulator by its ID/name, run:
+
+```bash
+flutter emulators --launch <EMULATOR_NAME>
+```
+
+_(Alternatively, simply connect your physical Android device via USB)._
+
+### 4. Run the Application
+
+Once your device or emulator is active, boot up the application using:
+
+```bash
+flutter run
+```
+
+---
+
+## 💡 Troubleshooting & Tips
+
+> ⚠️ **Important Note on First Run:**
+> Sometimes, the application might encounter minor bugs or UI glitches during the very first compilation. If this happens, perform a **Hot Restart** to reset the application state:
+>
+> - **Shortcut:** `Shift` + `R` in the terminal
